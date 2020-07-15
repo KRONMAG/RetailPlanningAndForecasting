@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailPlanningAndForecastin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailPlanningAndForecasting.Infrastructure", "RetailPlanningAndForecasting.Infrastructure\RetailPlanningAndForecasting.Infrastructure.csproj", "{4D56F815-683F-4E63-AF48-C329FBEC0599}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailPlanningAndForecasting", "RetailPlanningAndForecasting\RetailPlanningAndForecasting.csproj", "{E7A7BA45-91AE-49F1-B07F-174473C2A29F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{4D56F815-683F-4E63-AF48-C329FBEC0599}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D56F815-683F-4E63-AF48-C329FBEC0599}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D56F815-683F-4E63-AF48-C329FBEC0599}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7A7BA45-91AE-49F1-B07F-174473C2A29F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7A7BA45-91AE-49F1-B07F-174473C2A29F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7A7BA45-91AE-49F1-B07F-174473C2A29F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7A7BA45-91AE-49F1-B07F-174473C2A29F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

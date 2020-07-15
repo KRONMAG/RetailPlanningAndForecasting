@@ -35,6 +35,7 @@
       <HintPath>..\packages\CodeContracts.1.0.5680.18392\lib\net40\CodeContracts.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,14 +45,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DepartmentDirection.cs" />
-    <Compile Include="LFLLabel.cs" />
+    <Compile Include="GroupStatisticsRow.cs" />
+    <Compile Include="DepartmentsDirection.cs" />
+    <Compile Include="LikeForLike.cs" />
+    <Compile Include="DepartmentsType.cs" />
+    <Compile Include="DepartmentsGroup.cs" />
+    <Compile Include="NewDepartmentsCoefficient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Region.cs" />
-    <Compile Include="StandardCommodityCirculation.cs" />
+    <Compile Include="NormativeTurnover.cs" />
+    <Compile Include="TurnoverCalculator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DomainModel.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

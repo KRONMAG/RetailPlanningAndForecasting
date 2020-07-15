@@ -3,12 +3,12 @@ using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
 {
-    public class Region
+    public class DepartmentsDirection
     {
         [Key]
         public string Name { get; }
 
-        public Region(string name)
+        public DepartmentsDirection(string name)
         {
             Requires.NotNullOrEmpty(name, nameof(name));
 
