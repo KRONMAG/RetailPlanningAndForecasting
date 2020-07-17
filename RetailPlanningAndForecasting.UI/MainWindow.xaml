@@ -1,12 +1,19 @@
-﻿<Window x:Class="RetailPlanningAndForecasting.MainWindow"
+﻿<mahapps:MetroWindow x:Class="RetailPlanningAndForecasting.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RetailPlanningAndForecasting"
+        xmlns:local="clr-namespace:RetailPlanningAndForecasting.UI"
+        xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
-</Window>
+        WindowState="Maximized"
+        Title="Планирование и прогнозирование">
+    <TabControl>
+        <TabControl.Resources>
+            <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml"/>
+        </TabControl.Resources>
+        <mahapps:MetroTabItem Header="Настройки" mahapps:ControlsHelper.HeaderFontSize="20">
+            <local:SettingsControl/>
+        </mahapps:MetroTabItem>
+    </TabControl>
+</mahapps:MetroWindow>

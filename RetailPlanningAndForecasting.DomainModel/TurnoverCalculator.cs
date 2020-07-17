@@ -6,12 +6,28 @@ namespace RetailPlanningAndForecasting.DomainModel
 {
     public class TurnoverCalculator
     {
-        private IReadOnlyList<LikeForLike> _likeForLikes;
-        private IReadOnlyList<NormativeTurnover> _normativeTurnovers;
-        private NewDepartmentsCoefficient _newDepartmentsCoefficient;
+        private readonly IReadOnlyList<LikeForLike> _likeForLikes;
+        private readonly IReadOnlyList<NormativeTurnover> _normativeTurnovers;
+        private readonly NewDepartmentsCoefficient _newDepartmentsCoefficient;
+
+        public TurnoverCalculator(
+            IReadOnlyList<LikeForLike> likeForLikes,
+            IReadOnlyList<NormativeTurnover> normativeTurnovers,
+            NewDepartmentsCoefficient newDepartmentsCoefficient)
+        {
+            Requires.NotNull(likeForLikes, nameof(likeForLikes));
+            Requires.NotNull(normativeTurnovers, nameof(normativeTurnovers));
+            Requires.NotNull(newDepartmentsCoefficient, nameof(newDepartmentsCoefficient));
+
+            this._likeForLikes = likeForLikes;
+            this._normativeTurnovers = normativeTurnovers;
+            this._newDepartmentsCoefficient = newDepartmentsCoefficient;
+        }
 
         public void Calculate(DepartmentsGroup group)
         {
+            Requires.NotNull(group, nameof(group));
+
             foreach (var row in group)
                 row.Turnover = null;
             if (group.DepartmentsType == DepartmentsType.New && _newDepartmentsCoefficient.Value == null)
@@ -40,25 +56,10 @@ namespace RetailPlanningAndForecasting.DomainModel
                     {
                         row.Turnover = row.DepartmentsCount *
                             normativeTurnover.NewDepartmentTurnover *
-                            likeForLike.Coefficient *
                             _newDepartmentsCoefficient.Value;
                     }
                 }
             }
-        }
-
-        public TurnoverCalculator(
-            IReadOnlyList<LikeForLike> likeForLikes,
-            IReadOnlyList<NormativeTurnover> normativeTurnovers,
-            NewDepartmentsCoefficient newDepartmentsCoefficient)
-        {
-            Requires.NotNull(likeForLikes, nameof(likeForLikes));
-            Requires.NotNull(normativeTurnovers, nameof(normativeTurnovers));
-            Requires.NotNull(newDepartmentsCoefficient, nameof(newDepartmentsCoefficient));
-
-            this._likeForLikes = likeForLikes;
-            this._normativeTurnovers = normativeTurnovers;
-            this._newDepartmentsCoefficient = newDepartmentsCoefficient;
         }
     }
 }

@@ -2,11 +2,10 @@
 
 namespace RetailPlanningAndForecasting.UI
 {
-    public partial class MainWindow : MetroWindow
+    public partial class SettingsControl : MetroContentControl
     {
-        public MainWindow()
+        public SettingsControl()
         {
-            ViewModelLocator.Initalize(this);
             InitializeComponent();
         }
     }
