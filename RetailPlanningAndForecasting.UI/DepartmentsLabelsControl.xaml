@@ -1,0 +1,54 @@
+﻿<mahapps:MetroContentControl
+    x:Class="RetailPlanningAndForecasting.UI.DepartmentsLabelsControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:RetailPlanningAndForecasting.UI"
+    xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    DataContext="{Binding Source={x:Static local:ViewModelLocator.DepartmentsLabelsViewModel}}"
+    x:Name="Root"
+    Width="410">
+    <StackPanel>
+        <Label Content="Метки супермаркетов"
+               FontWeight="Bold"/>
+        <DataGrid ItemsSource="{Binding Labels}"
+                  AutoGenerateColumns="False"
+                  Height="230">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Название метки"
+                                    Binding="{Binding Name}"/>
+                <DataGridCheckBoxColumn Header="Представляет новые супермаркеты"
+                                        Binding="{Binding AreDepartmentsNew, Mode=OneWay}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding DataContext.RemoveLabelCommand, ElementName=Root}"
+                                    CommandParameter="{Binding .}">
+                                <icons:Material Kind="Close"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid  Margin="0 10 0 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBox Text="{Binding LabelName}"/>
+            <CheckBox Grid.Row="1"
+                      Content="Расчет ТО по формуле для новых супермаркетов"
+                      IsChecked="{Binding AreDepartmentsNew}"
+                      Margin="0 5 0 0"/>
+            <Button Grid.Column="1"
+                    Content="Добавить"
+                    Margin="10 0 0 0"
+                    Command="{Binding AddLabelCommand}"/>
+        </Grid>
+    </StackPanel>
+</mahapps:MetroContentControl>

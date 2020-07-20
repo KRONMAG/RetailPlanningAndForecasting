@@ -78,15 +78,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GroupStatisticsRow.cs" />
     <Compile Include="DepartmentsDirection.cs" />
     <Compile Include="LikeForLike.cs" />
-    <Compile Include="DepartmentsType.cs" />
+    <Compile Include="DepartmentsLabel.cs" />
     <Compile Include="DepartmentsGroup.cs" />
     <Compile Include="NewDepartmentsCoefficient.cs" />
+    <Compile Include="PlanningPeriod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Region.cs" />
-    <Compile Include="NormativeTurnover.cs" />
+    <Compile Include="TurnoverNormative.cs" />
     <Compile Include="TurnoverCalculator.cs" />
   </ItemGroup>
   <ItemGroup>

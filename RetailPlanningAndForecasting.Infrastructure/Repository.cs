@@ -38,13 +38,13 @@ namespace RetailPlanningAndForecasting.Infrastructure
         }
 
         public List<T> Get() =>
-            _dbSet.AsNoTracking().ToList();
+            _dbSet.ToList();
 
         public List<T> Get(Predicate<T> predicate)
         {
             Requires.NotNull(predicate, nameof(predicate));
 
-            return _dbSet.Where(item => predicate(item)).AsNoTracking().ToList();
+            return _dbSet.Where(item => predicate(item)).ToList();
         }
 
         public void Clear()

@@ -173,11 +173,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DepartmentsLabelsControl.xaml.cs">
+      <DependentUpon>DepartmentsLabelsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DialogService.cs" />
-    <Compile Include="SettingsControl.xaml.cs">
-      <DependentUpon>SettingsControl.xaml</DependentUpon>
+    <Compile Include="DepartmentsDirections.xaml.cs">
+      <DependentUpon>DepartmentsDirections.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModelCreationControl.xaml.cs">
+      <DependentUpon>ModelCreationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RegionsControl.xaml.cs">
+      <DependentUpon>RegionsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModelLocator.cs" />
+    <Page Include="DepartmentsDirections.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DepartmentsLabelsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -190,9 +207,13 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SettingsControl.xaml">
+    <Page Include="ModelCreationControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="RegionsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

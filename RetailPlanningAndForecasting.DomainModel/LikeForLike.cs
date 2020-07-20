@@ -6,7 +6,7 @@ namespace RetailPlanningAndForecasting.DomainModel
     {
         private decimal? _coefficient;
 
-        public DepartmentsType DepartmentType { get; }
+        public DepartmentsLabel DepartmentsLabel { get; }
 
         public int Year { get; }
 
@@ -21,11 +21,12 @@ namespace RetailPlanningAndForecasting.DomainModel
             }
         }
 
-        public LikeForLike(DepartmentsType departmentsType, int year)
+        public LikeForLike(DepartmentsLabel departmentsLabel, int year)
         {
+            Requires.NotNull(departmentsLabel, nameof(departmentsLabel));
             Requires.InRange(year >= 0, nameof(year));
 
-            this.DepartmentType = departmentsType;
+            this.DepartmentsLabel = departmentsLabel;
             this.Year = year;
         }
     }

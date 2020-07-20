@@ -1,34 +1,54 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using CodeContracts;
+﻿using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
 {
-    public class DepartmentsGroup : IEnumerable<GroupStatisticsRow>
+    public class DepartmentsGroup
     {
-        public virtual DepartmentsDirection DepartmentsDirection { get; }
+        private int? _departmentsCount;
+        private decimal? _plannedTurnover;
 
-        public virtual Region Region { get; }
+        public Region Region { get; }
 
-        public DepartmentsType DepartmentsType { get; }
+        public DepartmentsDirection DepartmentsDirection { get; }
 
-        public virtual IList<GroupStatisticsRow> Statistics { get; }
+        public DepartmentsLabel DepartmentsLabel { get; }
 
-        public DepartmentsGroup(DepartmentsDirection direction, Region region, DepartmentsType departmentsType)
+        public int Year { get; }
+
+        public int? DepartmentsCount
+        {
+            get => _departmentsCount;
+            set
+            {
+                Requires.InRange(value == null || value >= 0, nameof(value));
+
+                _departmentsCount = value;
+            }
+        }
+
+        public decimal? PlannedTurnover
+        {
+            get => _plannedTurnover;
+            set
+            {
+                Requires.InRange(value == null || value > 0, nameof(value));
+
+                _plannedTurnover = value;
+            }
+        }
+
+
+        public DepartmentsGroup(DepartmentsDirection direction, Region region, DepartmentsLabel label, int year)
         {
             Requires.NotNull(direction, nameof(direction));
             Requires.NotNull(region, nameof(region));
+            Requires.NotNull(label, nameof(label));
+            Requires.InRange(year > 0, nameof(year));
 
             this.DepartmentsDirection = direction;
             this.Region = region;
-            this.DepartmentsType = departmentsType;
-            this.Statistics = new List<GroupStatisticsRow>();
+            this.DepartmentsLabel = label;
+            this.Year = year;
         }
-
-        public IEnumerator<GroupStatisticsRow> GetEnumerator() =>
-            this.Statistics.GetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator() =>
-            this.Statistics.GetEnumerator();
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using RetailPlanningAndForecasting.DomainModel;
 
 namespace RetailPlanningAndForecasting.Infrastructure
@@ -9,6 +8,8 @@ namespace RetailPlanningAndForecasting.Infrastructure
         public DbSet<Region> Regions { get; set; }
 
         public DbSet<DepartmentsDirection> DepartmentsDirections { get; set; }
+
+        public DbSet<DepartmentsLabel> DepartmentsLabels { get; set; }
 
         public  AppDbContext() : base("AppDbConnection")
         {
