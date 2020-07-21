@@ -38,14 +38,13 @@ namespace RetailPlanningAndForecasting.DomainModel
         }
 
 
-        public DepartmentsGroup(DepartmentsDirection direction, Region region, DepartmentsLabel label, int year)
+        public DepartmentsGroup(Region region, DepartmentsDirection direction, DepartmentsLabel label, int year)
         {
-            Requires.NotNull(direction, nameof(direction));
             Requires.NotNull(region, nameof(region));
+            Requires.NotNull(direction, nameof(direction));
             Requires.NotNull(label, nameof(label));
             Requires.InRange(year > 0, nameof(year));
 
-            this.DepartmentsDirection = direction;
             this.Region = region;
             this.DepartmentsLabel = label;
             this.Year = year;

@@ -5,7 +5,7 @@
     xmlns:local="clr-namespace:RetailPlanningAndForecasting.UI"
     xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
-    DataContext="{Binding Source={x:Static local:ViewModelLocator.DepartmentsLabelsViewModel}}"
+    DataContext="{Binding DepartmentsLabelsViewModel, Source={StaticResource ViewModelLocator}}"
     x:Name="Root"
     Width="410">
     <StackPanel>
@@ -13,7 +13,7 @@
                FontWeight="Bold"/>
         <DataGrid ItemsSource="{Binding Labels}"
                   AutoGenerateColumns="False"
-                  Height="230">
+                  Height="240">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название метки"
                                     Binding="{Binding Name}"/>
@@ -40,7 +40,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <TextBox Text="{Binding LabelName}"/>
+            <TextBox Text="{Binding LabelName, UpdateSourceTrigger=PropertyChanged}"/>
             <CheckBox Grid.Row="1"
                       Content="Расчет ТО по формуле для новых супермаркетов"
                       IsChecked="{Binding AreDepartmentsNew}"

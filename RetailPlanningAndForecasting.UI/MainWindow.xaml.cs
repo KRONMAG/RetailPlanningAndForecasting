@@ -6,8 +6,12 @@ namespace RetailPlanningAndForecasting.UI
     {
         public MainWindow()
         {
-            ViewModelLocator.Initalize(this);
             InitializeComponent();
+        }
+
+        private void CreateModelClick(object sender, System.Windows.RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -1,0 +1,26 @@
+﻿<mahapps:MetroContentControl
+    x:Class="RetailPlanningAndForecasting.UI.PlanningPeriodControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
+    DataContext="{Binding PlanningPeriodViewModel, Source={StaticResource ViewModelLocator}}">
+    <StackPanel Orientation="Horizontal">
+        <Label Content="Период планирования:"/>
+        <mahapps:NumericUpDown Value="{Binding StartYear, UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ValueChanged">
+                    <i:InvokeCommandAction Command="{Binding SavePeriodCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </mahapps:NumericUpDown>
+        <Label Content=" — "/>
+        <mahapps:NumericUpDown Value="{Binding EndYear, UpdateSourceTrigger=PropertyChanged}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ValueChanged">
+                    <i:InvokeCommandAction Command="{Binding SavePeriodCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </mahapps:NumericUpDown>
+    </StackPanel>
+</mahapps:MetroContentControl>

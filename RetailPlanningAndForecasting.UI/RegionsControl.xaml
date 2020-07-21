@@ -5,7 +5,7 @@
     xmlns:local="clr-namespace:RetailPlanningAndForecasting.UI"
     xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
-    DataContext="{Binding Source={x:Static local:ViewModelLocator.RegionsViewModel}}"
+    DataContext="{Binding RegionsViewModel, Source={StaticResource ViewModelLocator}}"
     x:Name="Root"
     Width="350">
     <StackPanel>
@@ -37,7 +37,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox Text="{Binding RegionName}"
+            <TextBox Text="{Binding RegionName, UpdateSourceTrigger=PropertyChanged}"
                          mahapps:TextBoxHelper.ClearTextButton="True"/>
             <Button Grid.Column="1"
                         Content="Добавить"

@@ -11,6 +11,8 @@ namespace RetailPlanningAndForecasting.Infrastructure
 
         public DbSet<DepartmentsLabel> DepartmentsLabels { get; set; }
 
+        public DbSet<PlanningPeriod> PlanningPeriods { get; set; }
+
         public  AppDbContext() : base("AppDbConnection")
         {
 

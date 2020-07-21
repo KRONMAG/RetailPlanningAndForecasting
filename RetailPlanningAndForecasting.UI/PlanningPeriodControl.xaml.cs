@@ -2,9 +2,9 @@
 
 namespace RetailPlanningAndForecasting.UI
 {
-    public partial class DirectionsControl : MetroContentControl
+    public partial class PlanningPeriodControl : MetroContentControl
     {
-        public DirectionsControl()
+        public PlanningPeriodControl()
         {
             InitializeComponent();
         }

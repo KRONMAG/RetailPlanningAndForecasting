@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.ObjectModel;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Views;
-using GalaSoft.MvvmLight.Command;
+using Prism.Commands;
 using CodeContracts;
 using RetailPlanningAndForecasting.DomainModel;
 using RetailPlanningAndForecasting.Services;
@@ -11,52 +9,60 @@ namespace RetailPlanningAndForecasting.Presentation
 {
     public class DepartmentsDirectionsViewModel : ViewModelBase
     {
-        private readonly IDialogService _dialogService;
         private readonly IRepository<DepartmentsDirection> _repository;
+        private string _directionName;
 
         public ObservableCollection<DepartmentsDirection> Directions { get; }
 
-        public RelayCommand AddDirectionCommand { get; }
+        public DelegateCommand AddDirectionCommand { get; }
 
-        public RelayCommand<DepartmentsDirection> RemoveDirectionCommand { get; }
+        public DelegateCommand<DepartmentsDirection> RemoveDirectionCommand { get; }
 
-        public string DirectionName { get; set; }
-
-        public DepartmentsDirectionsViewModel(IDialogService dialogService, IRepositoryCreator repositoryCreator)
+        public string DirectionName
         {
-            Requires.NotNull(dialogService, nameof(dialogService));
+            get => _directionName;
+            set
+            {
+                base.ClearErrors(nameof(DirectionName));
+                base.SetProperty(ref _directionName, value);
+                if (string.IsNullOrEmpty(value))
+                    base.AddError(nameof(DirectionName), "Название направления супермаркета не может быть пустым");
+                else if (Directions.Any(direction => direction.Name == value))
+                    base.AddError(nameof(DirectionName), "Указанное направление уже содержится в списке");
+                AddDirectionCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public DepartmentsDirectionsViewModel(IRepositoryCreator repositoryCreator)
+        {
             Requires.NotNull(repositoryCreator, nameof(repositoryCreator));
 
-            _dialogService = dialogService;
             _repository = repositoryCreator.Create<DepartmentsDirection>();
 
             Directions = new ObservableCollection<DepartmentsDirection>(_repository.Get());
-            AddDirectionCommand = new RelayCommand(AddDirection);
-            RemoveDirectionCommand = new RelayCommand<DepartmentsDirection>(RemoveDirection);
+            AddDirectionCommand = new DelegateCommand
+            (
+                AddDirection, () => !base.HasErrors && _directionName !=null
+            );
+            RemoveDirectionCommand = new DelegateCommand<DepartmentsDirection>(RemoveDirection);
         }
 
         private void AddDirection()
         {
-            if (string.IsNullOrWhiteSpace(DirectionName))
-                _dialogService.ShowMessage("Название направления супермаркета не может быть пустым", "Ошибка ввода");
-            else if (Directions.Any(direction => direction.Name == DirectionName))
-                _dialogService.ShowMessage("Направление с указанным названием уже содержится в списке", "Ошибка ввода");
-            else
-            {
-                var newDirection = new DepartmentsDirection(DirectionName);
-                _repository.Add(new[] { newDirection });
-                Directions.Add(newDirection);
-                DirectionName = null;
-                base.RaisePropertyChanged(nameof(DirectionName));
-            }
+            var newDirection = new DepartmentsDirection(_directionName);
+            _repository.Add(new[] { newDirection });
+            Directions.Add(newDirection);
+            SetProperty(ref _directionName, null, nameof(DirectionName));
+            AddDirectionCommand.RaiseCanExecuteChanged();
         }
 
         private void RemoveDirection(DepartmentsDirection direction)
         {
-            Requires.NotNull(direction, nameof(direction));
-
-            _repository.Delete(new[] { direction });
-            Directions.Remove(direction);
+            if (direction != null && Directions.Contains(direction))
+            {
+                _repository.Delete(new[] { direction });
+                Directions.Remove(direction);
+            }
         }
     }
 }
