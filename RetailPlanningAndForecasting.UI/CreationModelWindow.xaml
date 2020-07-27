@@ -1,12 +1,85 @@
-﻿<Window x:Class="RetailPlanningAndForecasting.UI.CreationModelWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RetailPlanningAndForecasting.UI"
-        mc:Ignorable="d"
-        Title="CreationModelWindow" Height="450" Width="800">
+﻿<mahapps:MetroWindow
+    x:Class="RetailPlanningAndForecasting.UI.CreationModelWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    Title="Создание модели"
+    WindowState="Maximized"
+    DataContext="{Binding CreationModelViewModel, Source={StaticResource ViewModelLocator}}">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <GroupBox Grid.Column="1"
+                  Header="Коэффициент новых магазинов"
+                  HorizontalAlignment="Center"
+                  Margin="5">
+            <mahapps:NumericUpDown Value="{Binding NewDepartmentsCoefficient.Value, TargetNullValue=0.33, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
+        </GroupBox>
+        <GroupBox Grid.Row="1"
+                  Header="LFL-показатели"
+                  Margin="5">
+            <dxg:GridControl ItemsSource="{Binding LikeForLikes}"
+                                Height="auto"
+                                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn Header="Метка"
+                                    FieldName="DepartmentsLabel.Name"
+                                    ReadOnly="True"
+                                    GroupIndex="0"/>
+                    <dxg:GridColumn Header="Год"
+                                    FieldName="Year"
+                                    ReadOnly="True"/>
+                    <dxg:GridColumn Header="Коэффициент"
+                                    FieldName="Coefficient"
+                                    HorizontalHeaderContentAlignment="Center">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings MaskType="Numeric" NullText="1"/>
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                </dxg:GridControl.Columns>
+            </dxg:GridControl>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="1" Header="Нормативный товарооборот" Margin="5">
+            <dxg:GridControl ItemsSource="{Binding TurnoverNormatives}" HorizontalContentAlignment="Center">
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn Header="Регион"
+                                    FieldName="Region.Name"
+                                    AllowCellMerge="True"
+                                    ReadOnly="True"
+                                    GroupIndex="0"/>
+                    <dxg:GridColumn Header="Метка"
+                                    FieldName="DepartmentsLabel.Name"
+                                    ReadOnly="True"
+                                    AllowCellMerge="True"
+                                    SortIndex="0"/>
+                    <dxg:GridColumn Header="Направление"
+                                    FieldName="DepartmentsDirection.Name"
+                                    ReadOnly="True"/>
+                    <dxg:GridColumn Header="Товарооборот"
+                                    FieldName="NormativeTurnover">
+                        <dxg:GridColumn.EditSettings>
+                            <dxe:TextEditSettings MaskType="Numeric"
+                                                  NullText="0"/>
+                        </dxg:GridColumn.EditSettings>
+                    </dxg:GridColumn>
+                </dxg:GridControl.Columns>
+            </dxg:GridControl>
+        </GroupBox>
+        <Button Grid.Row="2"
+                Grid.Column="1"
+                Margin="5"
+                Content="Рассчитать товарооборот"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
     </Grid>
-</Window>
+</mahapps:MetroWindow>

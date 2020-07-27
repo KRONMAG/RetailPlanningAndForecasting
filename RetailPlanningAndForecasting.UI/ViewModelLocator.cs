@@ -15,7 +15,8 @@ namespace RetailPlanningAndForecasting.UI
                 .RegisterSingleton<IRepositoryCreator, RepositoryCreator>()
                 .RegisterSingleton<DepartmentsDirectionsViewModel>()
                 .RegisterSingleton<RegionsViewModel>()
-                .RegisterSingleton<DepartmentsLabelsViewModel>();
+                .RegisterSingleton<DepartmentsLabelsViewModel>()
+                .RegisterType<CreationModelViewModel>();
 
         public DepartmentsDirectionsViewModel DepartmentsDirectionsViewModel =>
             _container.Resolve<DepartmentsDirectionsViewModel>();
@@ -23,10 +24,13 @@ namespace RetailPlanningAndForecasting.UI
         public RegionsViewModel RegionsViewModel =>
             _container.Resolve<RegionsViewModel>();
 
-        public static DepartmentsLabelsViewModel DepartmentsLabelsViewModel =>
+        public DepartmentsLabelsViewModel DepartmentsLabelsViewModel =>
             _container.Resolve<DepartmentsLabelsViewModel>();
 
-        public static PlanningPeriodViewModel PlanningPeriodViewModel =>
+        public PlanningPeriodViewModel PlanningPeriodViewModel =>
             _container.Resolve<PlanningPeriodViewModel>();
+
+        public CreationModelViewModel CreationModelViewModel =>
+            _container.Resolve<CreationModelViewModel>();
     }
 }

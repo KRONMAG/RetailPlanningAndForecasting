@@ -1,8 +1,9 @@
-﻿using CodeContracts;
+﻿using Prism.Mvvm;
+using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
 {
-    public class LikeForLike
+    public class LikeForLike : BindableBase
     {
         private decimal? _coefficient;
 
@@ -15,9 +16,9 @@ namespace RetailPlanningAndForecasting.DomainModel
             get => _coefficient;
             set
             {
-                Requires.InRange(value == null || value > 0, nameof(value));
+                Requires.InRange(value == null || value > 0, nameof(value), "LFL-коэффициент должен быть больше нуля");
 
-                _coefficient = value;
+                base.SetProperty(ref _coefficient, value);
             }
         }
 

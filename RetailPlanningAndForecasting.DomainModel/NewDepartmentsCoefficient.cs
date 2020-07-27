@@ -1,8 +1,9 @@
-﻿using CodeContracts;
+﻿using Prism.Mvvm;
+using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
 {
-    public class NewDepartmentsCoefficient
+    public class NewDepartmentsCoefficient : BindableBase
     {
         private decimal? _value;
 
@@ -11,9 +12,9 @@ namespace RetailPlanningAndForecasting.DomainModel
             get => _value;
             set
             {
-                Requires.InRange(value == null || value > 0, nameof(value));
+                Requires.InRange(value == null || value > 0, nameof(value), "Коэффициент новых магазинов должен быть больше нуля");
 
-                _value = value;
+                SetProperty(ref _value, value);
             }
         }
     }

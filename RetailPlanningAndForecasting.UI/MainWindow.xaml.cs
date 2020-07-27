@@ -1,4 +1,5 @@
-﻿using MahApps.Metro.Controls;
+﻿using System.Windows;
+using MahApps.Metro.Controls;
 
 namespace RetailPlanningAndForecasting.UI
 {
@@ -9,9 +10,7 @@ namespace RetailPlanningAndForecasting.UI
             InitializeComponent();
         }
 
-        private void CreateModelClick(object sender, System.Windows.RoutedEventArgs e)
-        {
-
-        }
+        private void CreateModelClick(object sender, RoutedEventArgs e) =>
+            new CreationModelWindow().Show();
     }
 }

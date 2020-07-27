@@ -63,7 +63,7 @@ namespace RetailPlanningAndForecasting.DomainModel
                 var normativeTurnover = TurnoverNormatives
                     .First(item =>
                         item.DepartmentsLabel.Name == group.DepartmentsLabel.Name &&
-                        item.DepartmentDirection.Name == group.DepartmentsDirection.Name &&
+                        item.DepartmentsDirection.Name == group.DepartmentsDirection.Name &&
                         item.Region.Name == group.Region.Name);
                 if (normativeTurnover.NormativeTurnover == null)
                     continue;

@@ -1,14 +1,15 @@
 ﻿using CodeContracts;
+using Prism.Mvvm;
 
 namespace RetailPlanningAndForecasting.DomainModel
 {
-    public class TurnoverNormative
+    public class TurnoverNormative : BindableBase
     {
         private decimal? _normativeTurnover;
 
         public Region Region { get; }
 
-        public DepartmentsDirection DepartmentDirection { get; }
+        public DepartmentsDirection DepartmentsDirection { get; }
 
         public DepartmentsLabel DepartmentsLabel { get; }
 
@@ -17,9 +18,9 @@ namespace RetailPlanningAndForecasting.DomainModel
             get => _normativeTurnover;
             set
             {
-                Requires.InRange(value == null || value > 0, nameof(value));
+                Requires.InRange(value == null || value >= 0, nameof(value), "Нормативный товарооборот не может быть отрицательным");
 
-                _normativeTurnover = value;
+                base.SetProperty(ref _normativeTurnover, value);
             }
         }
 
@@ -30,7 +31,7 @@ namespace RetailPlanningAndForecasting.DomainModel
             Requires.NotNull(label, nameof(label));
 
             this.Region = region;
-            this.DepartmentDirection = direction;
+            this.DepartmentsDirection = direction;
             this.DepartmentsLabel = label;
         }
     }

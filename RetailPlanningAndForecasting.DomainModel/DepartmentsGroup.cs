@@ -1,8 +1,9 @@
-﻿using CodeContracts;
+﻿using Prism.Mvvm;
+using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
 {
-    public class DepartmentsGroup
+    public class DepartmentsGroup : BindableBase
     {
         private int? _departmentsCount;
         private decimal? _plannedTurnover;
@@ -20,9 +21,9 @@ namespace RetailPlanningAndForecasting.DomainModel
             get => _departmentsCount;
             set
             {
-                Requires.InRange(value == null || value >= 0, nameof(value));
+                Requires.InRange(value == null || value >= 0, nameof(value), "Количество супермаркетов не может быть отрицательным");
 
-                _departmentsCount = value;
+                base.SetProperty(ref _departmentsCount, value);
             }
         }
 
@@ -31,9 +32,9 @@ namespace RetailPlanningAndForecasting.DomainModel
             get => _plannedTurnover;
             set
             {
-                Requires.InRange(value == null || value > 0, nameof(value));
+                Requires.InRange(value == null || value >= 0, nameof(value), "Прогнозируемый товарооборот не может быть отрицательным");
 
-                _plannedTurnover = value;
+                base.SetProperty(ref _plannedTurnover, value);
             }
         }
 

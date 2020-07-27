@@ -76,7 +76,6 @@
     <Compile Include="CreationModelViewModel.cs" />
     <Compile Include="DepartmentsLabelsViewModel.cs" />
     <Compile Include="DepartmentsDirectionsViewModel.cs" />
-    <Compile Include="MainViewModel.cs" />
     <Compile Include="PlanningPeriodViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionsViewModel.cs" />
