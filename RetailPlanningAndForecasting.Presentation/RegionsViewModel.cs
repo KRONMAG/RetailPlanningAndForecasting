@@ -25,7 +25,7 @@ namespace RetailPlanningAndForecasting.Presentation
             {
                 base.ClearErrors(nameof(RegionName));
                 base.SetProperty(ref _regionName, value);
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                     base.AddError(nameof(RegionName), "Название региона не может быть пустым");
                 else if (Regions.Any(region => region.Name == value))
                     base.AddError(nameof(RegionName), "Указанный регион уже присутствует в списке");

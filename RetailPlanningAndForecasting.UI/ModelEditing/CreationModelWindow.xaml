@@ -5,9 +5,18 @@
     xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
     xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dataGrid2D="http://gu.se/DataGrid2D"
     Title="Создание модели"
     WindowState="Maximized"
     DataContext="{Binding CreationModelViewModel, Source={StaticResource ViewModelLocator}}">
+    <mahapps:MetroWindow.Resources>
+        <CollectionViewSource x:Key="DepartmentsGroups" Source="{Binding DepartmentGroups}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Region.Name"/>
+                <PropertyGroupDescription PropertyName="DepartmentsDirection.Name"/>
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </mahapps:MetroWindow.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -23,14 +32,15 @@
                   Header="Коэффициент новых магазинов"
                   HorizontalAlignment="Center"
                   Margin="5">
-            <mahapps:NumericUpDown Value="{Binding NewDepartmentsCoefficient.Value, TargetNullValue=0.33, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
+            <mahapps:NumericUpDown Value="{Binding NewDepartmentsCoefficient.Value, TargetNullValue=0.33, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"
+                                   Interval="0.01"/>
         </GroupBox>
         <GroupBox Grid.Row="1"
                   Header="LFL-показатели"
                   Margin="5">
             <dxg:GridControl ItemsSource="{Binding LikeForLikes}"
-                                Height="auto"
-                                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                             Height="auto"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <dxg:GridControl.Columns>
                     <dxg:GridColumn Header="Метка"
                                     FieldName="DepartmentsLabel.Name"
@@ -74,6 +84,43 @@
                     </dxg:GridColumn>
                 </dxg:GridControl.Columns>
             </dxg:GridControl>
+        </GroupBox>
+        <GroupBox Grid.Row="1" Grid.Column="2" Header="Количество супермаркетов">
+            <ListView ItemsSource="{Binding Source={StaticResource DepartmentsGroups}}">
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Margin" Value="5"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Expander Header="{Binding Name}" Content="{Binding ., Converter={StaticResource Converter}}"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+                <!--<DataGrid.Columns>
+                    <DataGridTextColumn Header="Метка" Binding="{Binding DepartmentsLabel.Name}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Год" Binding="{Binding Year}" IsReadOnly="True"/>
+                    <mahapps:DataGridNumericUpDownColumn Binding="{Binding DepartmentsCount}">
+                        <mahapps:DataGridNumericUpDownColumn.HeaderStyle>
+                            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MetroDataGridColumnHeader}">
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Content">
+                                    <Setter.Value>
+                                        <TextBlock Text="Количество&#13;супермаркетов" TextAlignment="Center"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </mahapps:DataGridNumericUpDownColumn.HeaderStyle>
+                    </mahapps:DataGridNumericUpDownColumn>
+                </DataGrid.Columns>-->
+            </ListView>
         </GroupBox>
         <Button Grid.Row="2"
                 Grid.Column="1"

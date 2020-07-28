@@ -25,7 +25,7 @@ namespace RetailPlanningAndForecasting.Presentation
             {
                 base.ClearErrors(nameof(DirectionName));
                 base.SetProperty(ref _directionName, value);
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrWhiteSpace(value))
                     base.AddError(nameof(DirectionName), "Название направления супермаркета не может быть пустым");
                 else if (Directions.Any(direction => direction.Name == value))
                     base.AddError(nameof(DirectionName), "Указанное направление уже содержится в списке");

@@ -3,9 +3,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:RetailPlanningAndForecasting.UI"
-    StartupUri="MainWindow.xaml">
+    StartupUri="ModelInitialization/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <local:Converter x:Key="Converter"/>
             <local:ViewModelLocator x:Key="ViewModelLocator"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />

@@ -38,7 +38,6 @@ namespace RetailPlanningAndForecasting.DomainModel
             }
         }
 
-
         public DepartmentsGroup(Region region, DepartmentsDirection direction, DepartmentsLabel label, int year)
         {
             Requires.NotNull(region, nameof(region));
@@ -47,6 +46,7 @@ namespace RetailPlanningAndForecasting.DomainModel
             Requires.InRange(year > 0, nameof(year));
 
             this.Region = region;
+            this.DepartmentsDirection = direction;
             this.DepartmentsLabel = label;
             this.Year = year;
         }
