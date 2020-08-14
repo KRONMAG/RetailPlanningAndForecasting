@@ -1,13 +1,12 @@
 ﻿using System.Windows;
-using DevExpress.Xpf.Grid;
 
 namespace RetailPlanningAndForecasting
 {
+    /// <summary>
+    /// Класс, представляющий текущее приложение
+    /// </summary>
     public partial class App : Application
     {
-        public App()
-        {
-            GridControl.AllowInfiniteGridSize = true;
-        }
+
     }
 }

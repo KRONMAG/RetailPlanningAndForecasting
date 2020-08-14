@@ -3,16 +3,25 @@ using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
 {
+    /// <summary>
+    /// Коэффициент новых отделений, учитываемый при расчете планируемого товарооборота
+    /// </summary>
     public class NewDepartmentsCoefficient : BindableBase
     {
+        /// <summary>
+        /// Значение коэффициента
+        /// </summary>
         private decimal? _value;
 
+        /// <summary>
+        /// Значение коэффициента
+        /// </summary>
         public decimal? Value
         {
             get => _value;
             set
             {
-                Requires.InRange(value == null || value > 0, nameof(value), "Коэффициент новых магазинов должен быть больше нуля");
+                Requires.True(value == null || value > 0, "Коэффициент новых магазинов должен быть больше нуля");
 
                 SetProperty(ref _value, value);
             }

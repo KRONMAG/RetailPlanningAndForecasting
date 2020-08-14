@@ -73,7 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CreationModelViewModel.cs" />
+    <Compile Include="ModelEditingViewModel.cs" />
     <Compile Include="DepartmentsLabelsViewModel.cs" />
     <Compile Include="DepartmentsDirectionsViewModel.cs" />
     <Compile Include="PlanningPeriodViewModel.cs" />

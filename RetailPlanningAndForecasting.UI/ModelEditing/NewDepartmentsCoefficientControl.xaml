@@ -1,0 +1,13 @@
+﻿<mahapps:MetroContentControl x:Class="RetailPlanningAndForecasting.UI.ModelEditing.NewDepartmentsCoefficientControl"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+     xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls">
+    <GroupBox Header="Коэффициент новых магазинов"
+                  HorizontalAlignment="Center">
+        <mahapps:NumericUpDown Value="{Binding Value,
+                                               TargetNullValue=0.33,
+                                               ValidatesOnExceptions=True,
+                                               UpdateSourceTrigger=PropertyChanged}"
+                               Interval="0.01"/>
+    </GroupBox>
+</mahapps:MetroContentControl>

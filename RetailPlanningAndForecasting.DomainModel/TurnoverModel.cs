@@ -4,16 +4,38 @@ using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
 {
+    /// <summary>
+    /// Модель расчета планируемого товарооборота
+    /// </summary>
     public class TurnoverModel
     {
+        /// <summary>
+        /// LikeForLike-коэффициенты
+        /// </summary>
         public IReadOnlyList<LikeForLike> LikeForLikes { get; }
 
+        /// <summary>
+        /// Нормативные товарообороты
+        /// </summary>
         public IReadOnlyList<TurnoverNormative> TurnoverNormatives { get; }
 
+        /// <summary>
+        /// Группы отделений, по который расчитывается планируемый товарооборот
+        /// </summary>
         public IReadOnlyList<DepartmentsGroup> DepartmentsGroups { get; }
 
+        /// <summary>
+        /// Коэффициент новых магазинов
+        /// </summary>
         public NewDepartmentsCoefficient NewDepartmentsCoefficient { get; }
 
+        /// <summary>
+        /// Создание экземпляра класса
+        /// </summary>
+        /// <param name="regions">Регионы, в которых находятся отделения</param>
+        /// <param name="directions">Направления отделений</param>
+        /// <param name="labels">Метки отделений</param>
+        /// <param name="period">Период планирования товарооборота</param>
         public TurnoverModel(IReadOnlyList<Region> regions,
             IReadOnlyList<DepartmentsDirection> directions,
             IReadOnlyList<DepartmentsLabel> labels,
@@ -51,6 +73,9 @@ namespace RetailPlanningAndForecasting.DomainModel
             NewDepartmentsCoefficient = new NewDepartmentsCoefficient();
         }
 
+        /// <summary>
+        /// Расчет планируемого товарооборота
+        /// </summary>
         public void CalculateTurnover()
         {
             foreach (var group in DepartmentsGroups)

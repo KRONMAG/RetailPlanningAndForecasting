@@ -6,14 +6,34 @@ using RetailPlanningAndForecasting.DomainModel;
 
 namespace RetailPlanningAndForecasting.Presentation
 {
+    /// <summary>
+    /// Модель представления редактирования периода планирования товарооборота
+    /// </summary>
     public class PlanningPeriodViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Создатель репозиториев
+        /// </summary>
         private readonly IRepository<PlanningPeriod> _repository;
+
+        /// <summary>
+        /// Год начала периода планирования
+        /// </summary>
         private int _startYear;
+
+        /// <summary>
+        /// Год окончания периода планирования
+        /// </summary>
         private int _endYear;
 
+        /// <summary>
+        /// Команда сохранения периода планирования
+        /// </summary>
         public DelegateCommand SavePeriodCommand { get; }
 
+        /// <summary>
+        /// Год начала периода планирования
+        /// </summary>
         public int StartYear
         {
             get => _startYear;
@@ -28,6 +48,9 @@ namespace RetailPlanningAndForecasting.Presentation
             }
         }
 
+        /// <summary>
+        /// Год окончания периода планирования
+        /// </summary>
         public int EndYear
         {
             get => _endYear;
@@ -43,6 +66,10 @@ namespace RetailPlanningAndForecasting.Presentation
             }
         }
 
+        /// <summary>
+        /// Создание экземпляра класса
+        /// </summary>
+        /// <param name="repositoryCreator">Создатель репозиториев</param>
         public PlanningPeriodViewModel(IRepositoryCreator repositoryCreator)
         {
             Requires.NotNull(repositoryCreator, nameof(repositoryCreator));
@@ -55,6 +82,10 @@ namespace RetailPlanningAndForecasting.Presentation
             SavePeriodCommand = new DelegateCommand(SavePeriod, () => !base.HasErrors);
         }
 
+        /// <summary>
+        /// Создание периода планирования на основе указанных годов его начала и конца,
+        /// добавление периода в список, хранилище данных
+        /// </summary>
         private void SavePeriod()
         {
             var newPeriod = new PlanningPeriod(_startYear, _endYear);

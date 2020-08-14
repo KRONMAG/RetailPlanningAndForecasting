@@ -1,13 +1,26 @@
-﻿using RetailPlanningAndForecasting.Services;
+﻿using System;
 using CodeContracts;
-using System;
+using RetailPlanningAndForecasting.Services;
 
 namespace RetailPlanningAndForecasting.Infrastructure
 {
+    /// <summary>
+    /// Создатель репозиториев для сущностей заданного типа
+    /// </summary>
     public class RepositoryCreator : IRepositoryCreator
     {
+        /// <summary>
+        /// Контекст базы данных
+        /// </summary>
         public AppDbContext _dbContext;
 
+        /// <summary>
+        /// Создание экземпляра класса
+        /// </summary>
+        /// <param name="dbContext">
+        /// Контекст базы данных, использующийся в качестве подключения
+        /// к источнику данных в создаваемых репозиториях
+        /// </param>
         public RepositoryCreator(AppDbContext dbContext)
         {
             Requires.NotNull(dbContext, nameof(dbContext));
@@ -15,6 +28,11 @@ namespace RetailPlanningAndForecasting.Infrastructure
             _dbContext = dbContext;
         }
 
+        /// <summary>
+        /// Создание репозитория для оперирования сущностями, представленными в источнике данных
+        /// </summary>
+        /// <typeparam name="T">Тип хранимой сущности</typeparam>
+        /// <returns>Репозиторий сущности указанного типа</returns>
         public IRepository<T> Create<T>() where T : class
         {
             try
@@ -23,7 +41,7 @@ namespace RetailPlanningAndForecasting.Infrastructure
             }
             catch(InvalidOperationException e)
             {
-                throw new InvalidOperationException($"Cannot create repository: unknown entity type {typeof(T).Name}", e);
+                throw new InvalidOperationException($"Невозможно создать репозиторий: неизвестный тип сущности {typeof(T).Name}", e);
             }
         }
     }

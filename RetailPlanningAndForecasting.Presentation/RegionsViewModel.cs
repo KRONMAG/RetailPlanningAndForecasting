@@ -7,17 +7,40 @@ using RetailPlanningAndForecasting.DomainModel;
 
 namespace RetailPlanningAndForecasting.Presentation
 {
+    /// <summary>
+    /// Модель представления редактирования списка регионов размещения
+    /// отделений торговой сети
+    /// </summary>
     public class RegionsViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Репозиторий регионов
+        /// </summary>
         private readonly IRepository<Region> _repository;
+
+        /// <summary>
+        /// Наименование добавляемого региона
+        /// </summary>
         private string _regionName;
 
+        /// <summary>
+        /// Список регионов
+        /// </summary>
         public ObservableCollection<Region> Regions { get; }
 
+        /// <summary>
+        /// Команда добавления региона в список
+        /// </summary>
         public DelegateCommand AddRegionCommand { get; }
 
+        /// <summary>
+        /// Команда удаления региона из списка
+        /// </summary>
         public DelegateCommand<Region> RemoveRegionCommand { get; }
 
+        /// <summary>
+        /// Наименование добавляемого региона
+        /// </summary>
         public string RegionName
         {
             get => _regionName;
@@ -33,6 +56,10 @@ namespace RetailPlanningAndForecasting.Presentation
             }
         }
 
+        /// <summary>
+        /// Создание экземпляра класса
+        /// </summary>
+        /// <param name="repositoryCreator">Создатель репозиториев</param>
         public RegionsViewModel(IRepositoryCreator repositoryCreator)
         {
             Requires.NotNull(repositoryCreator, nameof(repositoryCreator));
@@ -44,6 +71,9 @@ namespace RetailPlanningAndForecasting.Presentation
             RemoveRegionCommand = new DelegateCommand<Region>(RemoveRegion);
         }
 
+        /// <summary>
+        /// Создание региона с указанным наименованием, добавление его в список, хранилище данных
+        /// </summary>
         private void AddRegion()
         {
             var newRegion = new Region(_regionName);
@@ -53,6 +83,10 @@ namespace RetailPlanningAndForecasting.Presentation
             AddRegionCommand.RaiseCanExecuteChanged();
         }
 
+        /// <summary>
+        /// Удаление указанного региона из списка, хранилища данных
+        /// </summary>
+        /// <param name="region">Удаляемый регион</param>
         private void RemoveRegion(Region region)
         {
             if (region != null && Regions.Contains(region))

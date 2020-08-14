@@ -1,5 +1,5 @@
 ﻿<mahapps:MetroContentControl
-    x:Class="RetailPlanningAndForecasting.UI.DepartmentsLabelsControl"
+    x:Class="RetailPlanningAndForecasting.UI.ModelInitialization.DepartmentsLabelsControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"

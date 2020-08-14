@@ -1,0 +1,10 @@
+﻿<mahapps:MetroContentControl x:Class="RetailPlanningAndForecasting.UI.ModelEditing.LikeForLikesControl"
+     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+     xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
+     xmlns:converters="clr-namespace:RetailPlanningAndForecasting.UI.ModelEditing.Converters">
+    <mahapps:MetroContentControl.Resources>
+        <converters:LikeForLikesToDataGridConverter x:Key="LikeForLikesToDataGridConverter"/>
+    </mahapps:MetroContentControl.Resources>
+    <GroupBox Header="LFL-коэффициенты" Content="{Binding ., Converter={StaticResource LikeForLikesToDataGridConverter}}"/>
+</mahapps:MetroContentControl>

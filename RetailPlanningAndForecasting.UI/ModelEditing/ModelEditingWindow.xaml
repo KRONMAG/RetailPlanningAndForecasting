@@ -1,0 +1,40 @@
+﻿<mahapps:MetroWindow
+    x:Class="RetailPlanningAndForecasting.UI.ModelEditing.ModelEditingWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:local="clr-namespace:RetailPlanningAndForecasting.UI.ModelEditing"
+    Title="Создание модели"
+    WindowState="Maximized"
+    DataContext="{Binding ModelEditingViewModel, Source={StaticResource ViewModelLocator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <local:NewDepartmentsCoefficientControl DataContext="{Binding NewDepartmentsCoefficient}"
+                                                HorizontalAlignment="Center"
+                                                Margin="5"/>
+        <TabControl Grid.Row="1">
+            <TabItem Header="LFL-коэффициенты">
+                <local:LikeForLikesControl DataContext="{Binding LikeForLikes}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"/>
+            </TabItem>
+            <TabItem Header="Нормативный товарооборот">
+                <local:TurnoverNormativeControl DataContext="{Binding TurnoverNormatives}"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center"/>
+            </TabItem>
+            <TabItem Header="Количество магазинов">
+                <local:DepartmentsGroupsControl DataContext="{Binding DepartmentsGroups}"/>
+            </TabItem>
+        </TabControl>
+        <Button Grid.Row="2"
+                Margin="5"
+                Content="Рассчитать товарооборот"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"/>
+    </Grid>
+</mahapps:MetroWindow>
