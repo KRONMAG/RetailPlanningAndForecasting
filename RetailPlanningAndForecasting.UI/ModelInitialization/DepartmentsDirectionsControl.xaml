@@ -5,43 +5,43 @@
     xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:icons="http://metro.mahapps.com/winfx/xaml/iconpacks"
     DataContext="{Binding DepartmentsDirectionsViewModel, Source={StaticResource ViewModelLocator}}"
-    x:Name="Root"
-    Width="350">
-    <StackPanel Grid.Column="1">
-        <Label Content="Направления:"
-               FontWeight="Bold"/>
-        <ListView ItemsSource="{Binding Directions}"
-                  Height="250">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="30"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Content="{Binding Name}"/>
-                        <Button Grid.Column="1"
+    x:Name="Root">
+    <GroupBox Header="Направления">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <ListView ItemsSource="{Binding Directions}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{Binding Name}"/>
+                            <Button Grid.Column="1"
                                 Command="{Binding DataContext.RemoveDirectionCommand, ElementName=Root}"
                                 CommandParameter="{Binding .}">
-                            <icons:PackIconMaterial Kind="Close"
-                                                    Width="15"
-                                                    Height="15"/>
-                        </Button>
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBox Text="{Binding DirectionName, UpdateSourceTrigger=PropertyChanged}"
+                                <icons:PackIconMaterial Kind="Close"/>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Text="{Binding DirectionName, UpdateSourceTrigger=PropertyChanged}"
                      mahapps:TextBoxHelper.ClearTextButton="True"/>
-            <Button Grid.Column="1"
+                <Button Grid.Column="1"
                     Content="Добавить"
                     Margin="10 0 0 0"
                     Command="{Binding AddDirectionCommand}"/>
+            </Grid>
         </Grid>
-    </StackPanel>
+    </GroupBox>
 </mahapps:MetroContentControl>

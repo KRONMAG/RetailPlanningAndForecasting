@@ -22,7 +22,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <Expander Header="{Binding Name}">
+                                        <Expander Header="{Binding Name}" IsExpanded="True">
                                             <ListView ItemsSource="{Binding Items}">
                                                 <ListView.ItemsPanel>
                                                     <ItemsPanelTemplate>

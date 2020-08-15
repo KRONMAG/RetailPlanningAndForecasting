@@ -16,25 +16,27 @@
         <local:NewDepartmentsCoefficientControl DataContext="{Binding NewDepartmentsCoefficient}"
                                                 HorizontalAlignment="Center"
                                                 Margin="5"/>
-        <TabControl Grid.Row="1">
+        <mahapps:MetroAnimatedSingleRowTabControl Grid.Row="1">
+            <mahapps:MetroAnimatedSingleRowTabControl.ItemContainerStyle>
+                <Style TargetType="TabItem" BasedOn="{StaticResource MetroTabItem}">
+                    <Setter Property="mahapps:ControlsHelper.HeaderFontSize" Value="18"/>
+                </Style>
+            </mahapps:MetroAnimatedSingleRowTabControl.ItemContainerStyle>
             <TabItem Header="LFL-коэффициенты">
-                <local:LikeForLikesControl DataContext="{Binding LikeForLikes}"
-                                           VerticalAlignment="Center"
-                                           HorizontalAlignment="Center"/>
+                <local:LikeForLikesControl DataContext="{Binding LikeForLikes}"/>
             </TabItem>
             <TabItem Header="Нормативный товарооборот">
-                <local:TurnoverNormativeControl DataContext="{Binding TurnoverNormatives}"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"/>
+                <local:TurnoverNormativeControl DataContext="{Binding TurnoverNormatives}"/>
             </TabItem>
             <TabItem Header="Количество магазинов">
                 <local:DepartmentsGroupsControl DataContext="{Binding DepartmentsGroups}"/>
             </TabItem>
-        </TabControl>
+        </mahapps:MetroAnimatedSingleRowTabControl>
         <Button Grid.Row="2"
                 Margin="5"
                 Content="Рассчитать товарооборот"
                 VerticalAlignment="Center"
-                HorizontalAlignment="Center"/>
+                HorizontalAlignment="Center"
+                Command="{Binding CalculateTurnoverCommand}"/>
     </Grid>
 </mahapps:MetroWindow>
