@@ -5,7 +5,7 @@
     <GroupBox Header="Коэффициент новых магазинов"
                   HorizontalAlignment="Center">
         <mahapps:NumericUpDown Value="{Binding Value,
-                                               TargetNullValue=0.33,
+                                               TargetNullValue=0,
                                                ValidatesOnExceptions=True,
                                                UpdateSourceTrigger=PropertyChanged}"
                                Interval="0.01"/>

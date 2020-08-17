@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using CodeContracts;
 
@@ -7,27 +8,28 @@ namespace RetailPlanningAndForecasting.DomainModel
     /// <summary>
     /// Модель расчета планируемого товарооборота
     /// </summary>
+    [Serializable]
     public class TurnoverModel
     {
         /// <summary>
         /// LikeForLike-коэффициенты
         /// </summary>
-        public IReadOnlyList<LikeForLike> LikeForLikes { get; }
+        public IReadOnlyList<LikeForLike> LikeForLikes { get; private set; }
 
         /// <summary>
         /// Нормативные товарообороты
         /// </summary>
-        public IReadOnlyList<TurnoverNormative> TurnoverNormatives { get; }
+        public IReadOnlyList<TurnoverNormative> TurnoverNormatives { get; private set; }
 
         /// <summary>
         /// Группы отделений, по который расчитывается планируемый товарооборот
         /// </summary>
-        public IReadOnlyList<DepartmentsGroup> DepartmentsGroups { get; }
+        public IReadOnlyList<DepartmentsGroup> DepartmentsGroups { get; private set; }
 
         /// <summary>
         /// Коэффициент новых магазинов
         /// </summary>
-        public NewDepartmentsCoefficient NewDepartmentsCoefficient { get; }
+        public NewDepartmentsCoefficient NewDepartmentsCoefficient { get; private set; }
 
         /// <summary>
         /// Создание экземпляра класса
@@ -71,6 +73,11 @@ namespace RetailPlanningAndForecasting.DomainModel
                 .ToList();
 
             NewDepartmentsCoefficient = new NewDepartmentsCoefficient();
+        }
+
+        private TurnoverModel()
+        {
+
         }
 
         /// <summary>

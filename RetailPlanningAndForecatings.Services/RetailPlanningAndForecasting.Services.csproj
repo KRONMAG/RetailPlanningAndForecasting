@@ -63,8 +63,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IFileDialog.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IRepositoryCreator.cs" />
+    <Compile Include="ISerializeStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

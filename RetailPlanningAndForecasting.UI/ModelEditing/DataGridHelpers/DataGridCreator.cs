@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Markup;
 using System.Windows.Controls;
 using Gu.Wpf.DataGrid2D;
 
@@ -43,18 +42,21 @@ namespace RetailPlanningAndForecasting.UI.ModelEditing.DataGridHelpers
                 for (var j = 0; j < columnNames.Length; j++)
                     array[i, j] = items[(rowNames[i], columnNames[j])];
             var dataGrid = new DataGrid();
-            dataGrid.RowHeaderTemplate = (DataTemplate)XamlReader.Parse
-            (
-                @"<DataTemplate xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">
-                    <Label Content=""{Binding .}""/>
-                  </DataTemplate>"
-            );
             dataGrid.HeadersVisibility = DataGridHeadersVisibility.All;
-            dataGrid.SetColumnHeadersSource(columnNames);
-            dataGrid.SetRowHeadersSource(rowNames);
+            dataGrid.SetColumnHeadersSource(GetHeaders(columnNames));
+            dataGrid.SetRowHeadersSource(GetHeaders(rowNames));
             dataGrid.SetArray2D(array);
             dataGrid.SetTemplate(template);
             return dataGrid;
         }
+
+        private static Label[] GetHeaders<T>(T[] names) =>
+            names.Select
+            (
+                name => new Label
+                {
+                    Content = name,
+                }
+            ).ToArray();
     }
 }

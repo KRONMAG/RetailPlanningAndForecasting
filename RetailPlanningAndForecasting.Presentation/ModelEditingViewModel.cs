@@ -17,6 +17,10 @@ namespace RetailPlanningAndForecasting.Presentation
         /// </summary>
         private TurnoverModel _model;
 
+        private IFileDialog _fileDialog;
+
+        private ISerializeStream _serializeStream;
+
         /// <summary>
         /// LikeForLike-коэффициенты отделений
         /// </summary>
@@ -42,13 +46,20 @@ namespace RetailPlanningAndForecasting.Presentation
         /// </summary>
         public DelegateCommand CalculateTurnoverCommand { get; }
 
+        public DelegateCommand SaveModelCommand { get; }
+
         /// <summary>
         /// Создание экземпляра класса
         /// </summary>
         /// <param name="repositoryCreator">Создатель репозиториев</param>
-        public ModelEditingViewModel(IRepositoryCreator repositoryCreator)
+        public ModelEditingViewModel
+            (IRepositoryCreator repositoryCreator,
+            IFileDialog fileDialog,
+            ISerializeStream serializeStream)
         {
             Requires.NotNull(repositoryCreator, nameof(repositoryCreator));
+            Requires.NotNull(fileDialog, nameof(fileDialog));
+            Requires.NotNull(serializeStream, nameof(serializeStream));
 
             _model = new TurnoverModel
             (
@@ -57,12 +68,29 @@ namespace RetailPlanningAndForecasting.Presentation
                 repositoryCreator.Create<DepartmentsLabel>().Get(),
                 repositoryCreator.Create<PlanningPeriod>().Get().First()
             );
+            _fileDialog = fileDialog;
+            _serializeStream = serializeStream;
 
             LikeForLikes = _model.LikeForLikes;
             TurnoverNormatives = _model.TurnoverNormatives;
             DepartmentsGroups = _model.DepartmentsGroups;
             NewDepartmentsCoefficient = _model.NewDepartmentsCoefficient;
             CalculateTurnoverCommand = new DelegateCommand(_model.CalculateTurnover);
+            SaveModelCommand = new DelegateCommand(SaveModel);
+        }
+
+        private void SaveModel()
+        {
+            base.ClearErrors(null);
+            try
+            {
+                if (_fileDialog.SaveFileDialog(out string path))
+                    _serializeStream.Write(path, new[] { _model });
+            }
+            catch
+            {
+                base.AddError(null, "В ходе сохранения модели товарооборота произошла ошибка");
+            }
         }
     }
 }

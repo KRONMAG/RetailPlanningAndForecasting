@@ -14,13 +14,19 @@ namespace RetailPlanningAndForecasting.UI.ModelEditing.DataGridHelpers
         /// </summary>
         /// <param name="property">Наименование редактируемого свойства</param>
         /// <returns>Созданный шаблон данных</returns>
-        public static DataTemplate Create(string property) =>
+        public static DataTemplate Create(string property, bool isReadOnly = false) =>
             (DataTemplate)XamlReader.Parse
             (
                 $@"<DataTemplate 
                     xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""
                     xmlns:mahapps=""http://metro.mahapps.com/winfx/xaml/controls""> 
-                    <TextBox Text=""{{Binding {property}, TargetNullValue=0, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}}""/>
+                    <mahapps:NumericUpDown Value=""{{Binding {property},
+                        Mode={(isReadOnly ? "OneWay" : "TwoWay")},
+                        TargetNullValue=0,
+                        ValidatesOnExceptions=True,
+                        UpdateSourceTrigger=PropertyChanged}}""
+                        HideUpDownButtons=""True""
+                        IsReadOnly=""{isReadOnly}""/>
                 </DataTemplate>"
             );
     }

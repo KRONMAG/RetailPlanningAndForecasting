@@ -1,8 +1,10 @@
-﻿<mahapps:MetroContentControl x:Class="RetailPlanningAndForecasting.UI.ModelEditing.DepartmentsGroupsControl"
+﻿<mahapps:MetroContentControl
+    x:Class="RetailPlanningAndForecasting.UI.ModelEditing.DepartmentsGroupsControl"
      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
      xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
-     xmlns:converters="clr-namespace:RetailPlanningAndForecasting.UI.ModelEditing.Converters">
+     xmlns:converters="clr-namespace:RetailPlanningAndForecasting.UI.ModelEditing.Converters"
+     x:Name="Root">
     <mahapps:MetroContentControl.Resources>
         <CollectionViewSource x:Key="DepartmentsGroups" Source="{Binding .}">
             <CollectionViewSource.GroupDescriptions>
@@ -22,7 +24,8 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <Expander Header="{Binding Name}" IsExpanded="True">
+                                        <Expander Header="{Binding Name}"
+                                                  IsExpanded="True">
                                             <ListView ItemsSource="{Binding Items}">
                                                 <ListView.ItemsPanel>
                                                     <ItemsPanelTemplate>
@@ -35,9 +38,14 @@
                                                 </ListView.ItemsPanel>
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
-                                                        <GroupBox Header="{Binding Name}"
-                                                              Content="{Binding Items, Converter={StaticResource DepartmentsGroupsToDataGridConverter}}"
-                                                              Margin="3"/>
+                                                        <GroupBox Header="{Binding Name}" Margin="3">
+                                                            <GroupBox.Content>
+                                                                <MultiBinding Converter="{StaticResource DepartmentsGroupsToDataGridConverter}">
+                                                                    <Binding Path="Items"/>
+                                                                    <Binding Path="Tag" ElementName="Root"/>
+                                                                </MultiBinding>
+                                                            </GroupBox.Content>
+                                                        </GroupBox>
                                                     </DataTemplate>
                                                 </ListView.ItemTemplate>
                                             </ListView>

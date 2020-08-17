@@ -1,4 +1,5 @@
-﻿using CodeContracts;
+﻿using System;
+using CodeContracts;
 using Prism.Mvvm;
 
 namespace RetailPlanningAndForecasting.DomainModel
@@ -6,6 +7,7 @@ namespace RetailPlanningAndForecasting.DomainModel
     /// <summary>
     /// Нормативный товарооборот
     /// </summary>
+    [Serializable]
     public class TurnoverNormative : BindableBase
     {
         /// <summary>
@@ -16,17 +18,17 @@ namespace RetailPlanningAndForecasting.DomainModel
         /// <summary>
         /// Регион размещения отделений
         /// </summary>
-        public Region Region { get; }
+        public Region Region { get; private set; }
 
         /// <summary>
         /// Направление отделений
         /// </summary>
-        public DepartmentsDirection DepartmentsDirection { get; }
+        public DepartmentsDirection DepartmentsDirection { get; private set; }
 
         /// <summary>
         /// Метка отделений
         /// </summary>
-        public DepartmentsLabel DepartmentsLabel { get; }
+        public DepartmentsLabel DepartmentsLabel { get; private set; }
 
         /// <summary>
         /// Значение нормативного товарооборота
@@ -57,6 +59,11 @@ namespace RetailPlanningAndForecasting.DomainModel
             this.Region = region;
             this.DepartmentsDirection = direction;
             this.DepartmentsLabel = label;
+        }
+
+        private TurnoverNormative()
+        {
+
         }
     }
 }

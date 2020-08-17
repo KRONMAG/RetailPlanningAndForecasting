@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using System;
+using Prism.Mvvm;
 using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
@@ -6,6 +7,7 @@ namespace RetailPlanningAndForecasting.DomainModel
     /// <summary>
     /// LikeForLike-коэффициент
     /// </summary>
+    [Serializable]
     public class LikeForLike : BindableBase
     {
         /// <summary>
@@ -16,12 +18,12 @@ namespace RetailPlanningAndForecasting.DomainModel
         /// <summary>
         /// Метка отделений торговой сети, для которых указан LikeForLike-коэффициент
         /// </summary>
-        public DepartmentsLabel DepartmentsLabel { get; }
+        public DepartmentsLabel DepartmentsLabel { get; private set; }
 
         /// <summary>
         /// Год, для которого указан LikeForLike-коэффициент
         /// </summary>
-        public int Year { get; }
+        public int Year { get; private set; }
 
         /// <summary>
         /// Значение LikeForLike-коэффициента
@@ -49,6 +51,11 @@ namespace RetailPlanningAndForecasting.DomainModel
 
             this.DepartmentsLabel = departmentsLabel;
             this.Year = year;
+        }
+
+        private LikeForLike()
+        {
+
         }
     }
 }

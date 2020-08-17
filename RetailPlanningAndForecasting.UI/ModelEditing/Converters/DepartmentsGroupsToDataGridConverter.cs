@@ -11,21 +11,23 @@ namespace RetailPlanningAndForecasting.UI.ModelEditing.Converters
     /// <summary>
     /// Конвертер списка групп отделений в элемент управления DataGrid
     /// </summary>
-    public class DepartmentsGroupsToDataGridConverter : IValueConverter
+    public class DepartmentsGroupsToDataGridConverter : IMultiValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            var items = ((ReadOnlyObservableCollection<object>)value)
+            var items = ((ReadOnlyObservableCollection<object>)values[0])
                 .Cast<DepartmentsGroup>();
 
             return DataGridCreator.Create
             (
                 items.ToDictionary(item => (item.DepartmentsLabel.Name, item.Year), item => item),
-                CellTemplateCreator.Create("DepartmentsCount")
+                (string)values[1] == "DepartmentsCount" ?
+                    CellTemplateCreator.Create((string)values[1], false) :
+                    CellTemplateCreator.Create((string)values[1], true)
             );
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

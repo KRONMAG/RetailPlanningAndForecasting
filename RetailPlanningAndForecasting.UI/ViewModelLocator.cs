@@ -21,6 +21,8 @@ namespace RetailPlanningAndForecasting.UI
         static ViewModelLocator() =>
             _container = new UnityContainer()
                 .RegisterSingleton<AppDbContext>()
+                .RegisterSingleton<IFileDialog, FileDialog>()
+                .RegisterSingleton<ISerializeStream, SerializeStream>()
                 .RegisterSingleton<IRepositoryCreator, RepositoryCreator>()
                 .RegisterSingleton<DepartmentsDirectionsViewModel>()
                 .RegisterSingleton<RegionsViewModel>()

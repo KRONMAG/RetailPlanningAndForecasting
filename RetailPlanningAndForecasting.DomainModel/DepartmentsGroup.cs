@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using System;
+using Prism.Mvvm;
 using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
@@ -7,6 +8,7 @@ namespace RetailPlanningAndForecasting.DomainModel
     /// Статистика по группе отделений торговой сети за год
     /// Группу образуют отделения с одинаковым регионом размещения, направлением и меткой
     /// </summary>
+    [Serializable]
     public class DepartmentsGroup : BindableBase
     {
         /// <summary>
@@ -22,22 +24,22 @@ namespace RetailPlanningAndForecasting.DomainModel
         /// <summary>
         /// Наименование региона, в котором размещены отделения
         /// </summary>
-        public Region Region { get; }
+        public Region Region { get; private set; }
 
         /// <summary>
         /// Направление отделений
         /// </summary>
-        public DepartmentsDirection DepartmentsDirection { get; }
+        public DepartmentsDirection DepartmentsDirection { get; private set; }
 
         /// <summary>
         /// Метка отделений
         /// </summary>
-        public DepartmentsLabel DepartmentsLabel { get; }
+        public DepartmentsLabel DepartmentsLabel { get; private set; }
 
         /// <summary>
         /// Год, для которого указано количество отделений и планируемый товарооборот
         /// </summary>
-        public int Year { get; }
+        public int Year { get; private set; }
 
         /// <summary>
         /// Количество отделений
@@ -59,7 +61,7 @@ namespace RetailPlanningAndForecasting.DomainModel
         public decimal? PlannedTurnover
         {
             get => _plannedTurnover;
-            set
+            internal set
             {
                 Requires.True(value == null || value >= 0, "Прогнозируемый товарооборот не может быть отрицательным");
 
@@ -85,6 +87,11 @@ namespace RetailPlanningAndForecasting.DomainModel
             this.DepartmentsDirection = direction;
             this.DepartmentsLabel = label;
             this.Year = year;
+        }
+
+        private DepartmentsGroup()
+        {
+
         }
     }
 }

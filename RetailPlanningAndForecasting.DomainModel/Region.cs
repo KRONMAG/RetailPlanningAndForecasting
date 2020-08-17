@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
@@ -6,6 +7,7 @@ namespace RetailPlanningAndForecasting.DomainModel
     /// <summary>
     /// Регион размещения отделений торговой сети
     /// </summary>
+    [Serializable]
     public class Region
     {
         /// <summary>
