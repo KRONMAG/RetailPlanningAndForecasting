@@ -4,13 +4,14 @@ using Prism.Commands;
 using CodeContracts;
 using RetailPlanningAndForecasting.DomainModel;
 using RetailPlanningAndForecasting.Services;
+using RetailPlanningAndForecasting.Presentation.Common;
 
 namespace RetailPlanningAndForecasting.Presentation
 {
     /// <summary>
     /// Модель представления редактирования списка меток отделений торговой сети
     /// </summary>
-    public class DepartmentsLabelsViewModel : ViewModelBase
+    public sealed class DepartmentsLabelsViewModel : ViewModelBase
     {
         /// <summary>
         /// Репозиторий меток отделений
@@ -51,12 +52,12 @@ namespace RetailPlanningAndForecasting.Presentation
             get => _labelName;
             set
             {
-                base.ClearErrors(nameof(LabelName));
+                ClearErrors(nameof(LabelName));
                 SetProperty(ref _labelName, value);
                 if (string.IsNullOrWhiteSpace(value))
-                    base.AddError(nameof(LabelName), "Название метки супермаркета не может быть пустым");
+                    AddError(nameof(LabelName), "Название метки супермаркета не может быть пустым");
                 else if (Labels.Any(label => label.Name == value))
-                    base.AddError(nameof(LabelName), "Указанная метка уже присутствует в списке");
+                    AddError(nameof(LabelName), "Указанная метка уже присутствует в списке");
                 AddLabelCommand.RaiseCanExecuteChanged();
             }
         }
@@ -74,18 +75,18 @@ namespace RetailPlanningAndForecasting.Presentation
         /// <summary>
         /// Создание экземпляра класса
         /// </summary>
-        /// <param name="repositoryCreator">Создатель репозиториев</param>
-        public DepartmentsLabelsViewModel(IRepositoryCreator repositoryCreator)
+        /// <param name="repository">Репозиторий меток отделений</param>
+        public DepartmentsLabelsViewModel(IRepository<DepartmentsLabel> repository)
         {
-            Requires.NotNull(repositoryCreator, nameof(repositoryCreator));
+            Requires.NotNull(repository, nameof(repository));
 
-            _repository = repositoryCreator.Create<DepartmentsLabel>();
+            _repository = repository;
 
-            Labels = new ObservableCollection<DepartmentsLabel>(_repository.Get());
+            Labels = new ObservableCollection<DepartmentsLabel>(repository.Get());
             AddLabelCommand = new DelegateCommand
             (
                 AddLabel,
-                () => !base.HasErrors && _labelName != null
+                () => !HasErrors && _labelName != null
             );
             RemoveLabelCommand = new DelegateCommand<DepartmentsLabel>(RemoveLabel);
         }

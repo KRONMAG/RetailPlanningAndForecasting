@@ -4,13 +4,14 @@ using Prism.Commands;
 using CodeContracts;
 using RetailPlanningAndForecasting.DomainModel;
 using RetailPlanningAndForecasting.Services;
+using RetailPlanningAndForecasting.Presentation.Common;
 
 namespace RetailPlanningAndForecasting.Presentation
 {
     /// <summary>
     /// Модель представления редактирования списка направлений отделений торговой сети
     /// </summary>
-    public class DepartmentsDirectionsViewModel : ViewModelBase
+    public sealed class DepartmentsDirectionsViewModel : ViewModelBase
     {
         /// <summary>
         /// Репозиторий направлений отделений
@@ -45,12 +46,12 @@ namespace RetailPlanningAndForecasting.Presentation
             get => _directionName;
             set
             {
-                base.ClearErrors(nameof(DirectionName));
-                base.SetProperty(ref _directionName, value);
+                ClearErrors(nameof(DirectionName));
+                SetProperty(ref _directionName, value);
                 if (string.IsNullOrWhiteSpace(value))
-                    base.AddError(nameof(DirectionName), "Название направления супермаркета не может быть пустым");
+                    AddError(nameof(DirectionName), "Название направления супермаркета не может быть пустым");
                 else if (Directions.Any(direction => direction.Name == value))
-                    base.AddError(nameof(DirectionName), "Указанное направление уже содержится в списке");
+                    AddError(nameof(DirectionName), "Указанное направление уже содержится в списке");
                 AddDirectionCommand.RaiseCanExecuteChanged();
             }
         }
@@ -58,24 +59,23 @@ namespace RetailPlanningAndForecasting.Presentation
         /// <summary>
         /// Создание экземпляра класса
         /// </summary>
-        /// <param name="repositoryCreator">Создатель репозиториев</param>
-        public DepartmentsDirectionsViewModel(IRepositoryCreator repositoryCreator)
+        /// <param name="repository">Репозиторий направлений отделений</param>
+        public DepartmentsDirectionsViewModel(IRepository<DepartmentsDirection> repository)
         {
-            Requires.NotNull(repositoryCreator, nameof(repositoryCreator));
+            Requires.NotNull(repository, nameof(repository));
 
-            _repository = repositoryCreator.Create<DepartmentsDirection>();
+            _repository = repository;
 
-            Directions = new ObservableCollection<DepartmentsDirection>(_repository.Get());
+            Directions = new ObservableCollection<DepartmentsDirection>(repository.Get());
             AddDirectionCommand = new DelegateCommand
             (
-                AddDirection, () => !base.HasErrors && _directionName !=null
+                AddDirection, () => !HasErrors && _directionName !=null
             );
             RemoveDirectionCommand = new DelegateCommand<DepartmentsDirection>(RemoveDirection);
         }
 
         /// <summary>
-        /// Создание направления с указанным наименованием
-        /// с добавлением его в список и хранилище данных
+        /// Создание направления с указанным наименованием с добавлением его в список и хранилище данных
         /// </summary>
         private void AddDirection()
         {

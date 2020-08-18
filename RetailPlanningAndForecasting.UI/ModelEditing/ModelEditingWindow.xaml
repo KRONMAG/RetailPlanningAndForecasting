@@ -5,17 +5,14 @@
     xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:local="clr-namespace:RetailPlanningAndForecasting.UI.ModelEditing"
     Title="Создание модели"
-    WindowState="Maximized"
-    DataContext="{Binding ModelEditingViewModel, Source={StaticResource ViewModelLocator}, ValidatesOnNotifyDataErrors=True, NotifyOnValidationError=True}"
-    Validation.Error="Error">
+    WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <local:NewDepartmentsCoefficientControl DataContext="{Binding NewDepartmentsCoefficient}"
-                                                HorizontalAlignment="Center"
+        <local:NewDepartmentsCoefficientControl HorizontalAlignment="Center"
                                                 Margin="5"/>
         <mahapps:MetroAnimatedSingleRowTabControl Grid.Row="1"
                                                   mahapps:TabControlHelper.IsUnderlined="True"
@@ -26,31 +23,25 @@
                 </Style>
             </mahapps:MetroAnimatedSingleRowTabControl.ItemContainerStyle>
             <TabItem Header="LFL-коэффициенты">
-                <local:LikeForLikesControl DataContext="{Binding LikeForLikes}"
-                                           VerticalAlignment="Center"
+                <local:LikeForLikesControl VerticalAlignment="Center"
                                            HorizontalAlignment="Center"/>
             </TabItem>
             <TabItem Header="Нормативный товарооборот">
-                <local:TurnoverNormativeControl DataContext="{Binding TurnoverNormatives}"
-                                                VerticalAlignment="Center"
+                <local:TurnoverNormativeControl VerticalAlignment="Center"
                                                 HorizontalAlignment="Center"/>
             </TabItem>
             <TabItem Header="Количество магазинов">
-                <local:DepartmentsGroupsControl DataContext="{Binding DepartmentsGroups}"
-                                                Tag="DepartmentsCount"
-                                                VerticalAlignment="Center"
-                                                HorizontalAlignment="Center"/>
+                <local:DepartmentsGroupsControl Tag="DepartmentsCount"/>
             </TabItem>
             <TabItem Header="Товарооборот">
-                <local:DepartmentsGroupsControl DataContext="{Binding DepartmentsGroups}"
-                                                Tag="PlannedTurnover"/>
+                <local:DepartmentsGroupsControl Tag="PlannedTurnover"/>
             </TabItem>
         </mahapps:MetroAnimatedSingleRowTabControl>
         <StackPanel Grid.Row="2"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Margin="5">
+                    Margin="10">
             <Button Content="Рассчитать товарооборот"
                     Command="{Binding CalculateTurnoverCommand}"/>
             <Button Content="Сохранить модель"

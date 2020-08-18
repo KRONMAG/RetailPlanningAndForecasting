@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
@@ -7,7 +6,6 @@ namespace RetailPlanningAndForecasting.DomainModel
     /// <summary>
     /// Направление отделений торговой сети
     /// </summary>
-    [Serializable]
     public class DepartmentsDirection
     {
         /// <summary>
@@ -24,7 +22,7 @@ namespace RetailPlanningAndForecasting.DomainModel
         {
             Requires.NotNullOrEmpty(name, nameof(name));
 
-            this.Name = name;
+            Name = name;
         }
 
         /// <summary>

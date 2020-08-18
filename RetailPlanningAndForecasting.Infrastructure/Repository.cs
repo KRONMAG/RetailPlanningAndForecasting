@@ -14,7 +14,7 @@ namespace RetailPlanningAndForecasting.Infrastructure
     /// - удаление сущности из хранилища
     /// </summary>
     /// <typeparam name="T">Тип хранимой сущности</typeparam>
-    public class Repository<T> : IRepository<T> where T : class
+    public sealed class Repository<T> : IRepository<T> where T : class
     {
         /// <summary>
         /// Контекст базы данных

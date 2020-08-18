@@ -7,7 +7,7 @@ namespace RetailPlanningAndForecasting.DomainModel
     /// <summary>
     /// Период планирования товарооборота
     /// </summary>
-    public class PlanningPeriod
+    public sealed class PlanningPeriod
     {
         /// <summary>
         /// Год начала периода

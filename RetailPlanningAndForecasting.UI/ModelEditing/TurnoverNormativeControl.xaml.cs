@@ -5,8 +5,11 @@ namespace RetailPlanningAndForecasting.UI.ModelEditing
     /// <summary>
     /// Элемент управления редактирования нормативов товарооборота
     /// </summary>
-    public partial class TurnoverNormativeControl : MetroContentControl
+    public sealed partial class TurnoverNormativeControl : MetroContentControl
     {
+        /// <summary>
+        /// Инициализация элементу управления
+        /// </summary>
         public TurnoverNormativeControl()
         {
             InitializeComponent();

@@ -4,7 +4,7 @@
      xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls">
     <GroupBox Header="Коэффициент новых магазинов"
                   HorizontalAlignment="Center">
-        <mahapps:NumericUpDown Value="{Binding Value,
+        <mahapps:NumericUpDown Value="{Binding NewDepartmentsCoefficient.Value,
                                                TargetNullValue=0,
                                                ValidatesOnExceptions=True,
                                                UpdateSourceTrigger=PropertyChanged}"

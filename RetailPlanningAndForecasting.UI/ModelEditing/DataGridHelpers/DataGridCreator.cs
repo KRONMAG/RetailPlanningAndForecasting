@@ -9,7 +9,7 @@ namespace RetailPlanningAndForecasting.UI.ModelEditing.DataGridHelpers
     /// <summary>
     /// Создатель элемента управления DataGrid
     /// </summary>
-    public class DataGridCreator
+    public static class DataGridCreator
     {
         /// <summary>
         /// Создание элемента управления DataGrid на основе словаря,
@@ -42,6 +42,7 @@ namespace RetailPlanningAndForecasting.UI.ModelEditing.DataGridHelpers
                 for (var j = 0; j < columnNames.Length; j++)
                     array[i, j] = items[(rowNames[i], columnNames[j])];
             var dataGrid = new DataGrid();
+            dataGrid.CanUserResizeColumns = false;
             dataGrid.HeadersVisibility = DataGridHeadersVisibility.All;
             dataGrid.SetColumnHeadersSource(GetHeaders(columnNames));
             dataGrid.SetRowHeadersSource(GetHeaders(rowNames));
@@ -50,6 +51,14 @@ namespace RetailPlanningAndForecasting.UI.ModelEditing.DataGridHelpers
             return dataGrid;
         }
 
+        /// <summary>
+        /// Создание массива меток на основе массива заголовков
+        /// </summary>
+        /// <typeparam name="T">Тип данных заголовка</typeparam>
+        /// <param name="names">Массив заголовков</param>
+        /// <returns>
+        /// Массив меток, каждая метка содержит наименование заголовка
+        /// </returns>
         private static Label[] GetHeaders<T>(T[] names) =>
             names.Select
             (

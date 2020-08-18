@@ -4,15 +4,15 @@ using System.Windows.Markup;
 namespace RetailPlanningAndForecasting.UI.ModelEditing.DataGridHelpers
 {
     /// <summary>
-    /// Создатель шаблона данных для редактирования значений
+    /// Создатель шаблона данных показа содержимого свойства числового типа
     /// </summary>
-    public class CellTemplateCreator
+    public static class CellTemplateCreator
     {
         /// <summary>
-        /// Создание шаблона данных для редактирования значений
-        /// свойства с указанным именем в текстовом поле
+        /// Создание шаблона данных для отображения свойства с указанным именем
         /// </summary>
-        /// <param name="property">Наименование редактируемого свойства</param>
+        /// <param name="property">Наименование отображаемого свойства</param>
+        /// <param name="isReadOnly">Разрешено ли редактирование значения свойства</param>
         /// <returns>Созданный шаблон данных</returns>
         public static DataTemplate Create(string property, bool isReadOnly = false) =>
             (DataTemplate)XamlReader.Parse

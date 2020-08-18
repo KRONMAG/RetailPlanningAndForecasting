@@ -1,5 +1,4 @@
-﻿using System;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
@@ -7,8 +6,7 @@ namespace RetailPlanningAndForecasting.DomainModel
     /// <summary>
     /// LikeForLike-коэффициент
     /// </summary>
-    [Serializable]
-    public class LikeForLike : BindableBase
+    public sealed class LikeForLike : BindableBase
     {
         /// <summary>
         /// Значение LikeForLike-коэффициента
@@ -35,7 +33,7 @@ namespace RetailPlanningAndForecasting.DomainModel
             {
                 Requires.True(value == null || value > 0, "LFL-коэффициент должен быть больше нуля");
 
-                base.SetProperty(ref _coefficient, value);
+                SetProperty(ref _coefficient, value);
             }
         }
 
@@ -49,10 +47,13 @@ namespace RetailPlanningAndForecasting.DomainModel
             Requires.NotNull(departmentsLabel, nameof(departmentsLabel));
             Requires.InRange(year >= 0, nameof(year));
 
-            this.DepartmentsLabel = departmentsLabel;
-            this.Year = year;
+            DepartmentsLabel = departmentsLabel;
+            Year = year;
         }
 
+        /// <summary>
+        /// Конструктор по умолчанию для десереализации объекта
+        /// </summary>
         private LikeForLike()
         {
 

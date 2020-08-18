@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
@@ -7,8 +6,7 @@ namespace RetailPlanningAndForecasting.DomainModel
     /// <summary>
     /// Метка отделений торговой сети
     /// </summary>
-    [Serializable]
-    public class DepartmentsLabel
+    public sealed class DepartmentsLabel
     {
         /// <summary>
         /// Наименование метки
@@ -34,8 +32,8 @@ namespace RetailPlanningAndForecasting.DomainModel
         {
             Requires.NotNullOrEmpty(name, nameof(name));
 
-            this.Name = name;
-            this.AreDepartmentsNew = areDepartmentsNew;
+            Name = name;
+            AreDepartmentsNew = areDepartmentsNew;
         }
 
         /// <summary>

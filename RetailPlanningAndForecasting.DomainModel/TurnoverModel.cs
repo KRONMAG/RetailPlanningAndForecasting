@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 using CodeContracts;
 
@@ -8,8 +7,7 @@ namespace RetailPlanningAndForecasting.DomainModel
     /// <summary>
     /// Модель расчета планируемого товарооборота
     /// </summary>
-    [Serializable]
-    public class TurnoverModel
+    public sealed class TurnoverModel
     {
         /// <summary>
         /// LikeForLike-коэффициенты
@@ -49,11 +47,11 @@ namespace RetailPlanningAndForecasting.DomainModel
             Requires.NotNull(period, nameof(period));
 
             var years = Enumerable.Range(period.StartYear, period.EndYear - period.StartYear + 1);
-            var product = (from region in regions
-                           from direction in directions
-                           from label in labels
-                           from year in years
-                           select (region, direction, label, year));
+            var product = from region in regions
+                          from direction in directions
+                          from label in labels
+                          from year in years
+                          select (region, direction, label, year);
 
             LikeForLikes = product
                 .Select(item => (item.label, item.year))
@@ -75,6 +73,9 @@ namespace RetailPlanningAndForecasting.DomainModel
             NewDepartmentsCoefficient = new NewDepartmentsCoefficient();
         }
 
+        /// <summary>
+        /// Конструктор для десереализации объекта
+        /// </summary>
         private TurnoverModel()
         {
 

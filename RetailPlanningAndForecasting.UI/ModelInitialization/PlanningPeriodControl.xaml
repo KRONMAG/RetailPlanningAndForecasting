@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
-    DataContext="{Binding PlanningPeriodViewModel, Source={StaticResource ViewModelLocator}}">
+    DataContext="{Binding PlanningPeriodViewModel}">
     <GroupBox Header="Период планирования">
         <StackPanel Orientation="Horizontal">
             <mahapps:NumericUpDown Value="{Binding StartYear, UpdateSourceTrigger=PropertyChanged}">

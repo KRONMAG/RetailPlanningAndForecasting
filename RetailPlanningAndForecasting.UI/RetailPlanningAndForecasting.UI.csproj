@@ -210,8 +210,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="FileDialog.cs" />
+    <Compile Include="DialogService.cs" />
     <Compile Include="ModelEditing\Converters\DepartmentsGroupsToDataGridConverter.cs" />
+    <Compile Include="ModelEditing\Converters\WindowWidthToWrapPanelWidthConverter.cs" />
     <Compile Include="ModelEditing\ModelEditingWindow.xaml.cs">
       <DependentUpon>ModelEditingWindow.xaml</DependentUpon>
     </Compile>
@@ -243,7 +244,6 @@
     <Compile Include="ModelInitialization\RegionsControl.xaml.cs">
       <DependentUpon>RegionsControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModelLocator.cs" />
     <Page Include="ModelEditing\ModelEditingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

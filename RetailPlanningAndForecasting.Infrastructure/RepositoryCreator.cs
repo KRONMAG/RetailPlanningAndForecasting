@@ -7,7 +7,7 @@ namespace RetailPlanningAndForecasting.Infrastructure
     /// <summary>
     /// Создатель репозиториев для сущностей заданного типа
     /// </summary>
-    public class RepositoryCreator : IRepositoryCreator
+    public sealed class RepositoryCreator : IRepositoryCreator
     {
         /// <summary>
         /// Контекст базы данных

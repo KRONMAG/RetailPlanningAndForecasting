@@ -6,7 +6,7 @@ namespace RetailPlanningAndForecasting.UI.ModelEditing
     /// Элемент управления редактирования количества направлений
     /// для каждой группы отделений
     /// </summary>
-    public partial class DepartmentsGroupsControl : MetroContentControl
+    public sealed partial class DepartmentsGroupsControl : MetroContentControl
     {
         /// <summary>
         /// Инициализация элемента управления

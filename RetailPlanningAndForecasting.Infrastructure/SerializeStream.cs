@@ -13,7 +13,7 @@ namespace RetailPlanningAndForecasting.Infrastructure
     /// - сериализации и сохранения объектов в файл
     /// - загрузки объектов из файла и их десереализации
     /// </summary>
-    public class SerializeStream : ISerializeStream
+    public sealed class SerializeStream : ISerializeStream
     {
         /// <summary>
         /// Сериализация объектов, запись полученных данных в файл
@@ -53,7 +53,15 @@ namespace RetailPlanningAndForecasting.Infrastructure
             Requires.True(File.Exists(path), nameof(path), $"Не найден файл {path}");
 
             return JsonConvert
-                .DeserializeObject<IReadOnlyList<T>>(File.ReadAllText(path))
+                .DeserializeObject<IReadOnlyList<T>>
+                (
+                    File.ReadAllText(path),
+                    new JsonSerializerSettings
+                    {
+                        ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
+                        ContractResolver = new PrivateSetterContractResolver()
+                    }
+                )
                 .ToList();
         }
     }

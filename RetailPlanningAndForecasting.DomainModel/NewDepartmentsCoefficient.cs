@@ -1,5 +1,4 @@
-﻿using System;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
@@ -7,8 +6,7 @@ namespace RetailPlanningAndForecasting.DomainModel
     /// <summary>
     /// Коэффициент новых отделений, учитываемый при расчете планируемого товарооборота
     /// </summary>
-    [Serializable]
-    public class NewDepartmentsCoefficient : BindableBase
+    public sealed class NewDepartmentsCoefficient : BindableBase
     {
         /// <summary>
         /// Значение коэффициента

@@ -1,25 +1,27 @@
-﻿using System.Windows.Controls;
-using MahApps.Metro.Controls;
-using MahApps.Metro.Controls.Dialogs;
+﻿using MahApps.Metro.Controls;
+using CodeContracts;
+using RetailPlanningAndForecasting.Presentation;
+using RetailPlanningAndForecasting.Presentation.Common;
 
 namespace RetailPlanningAndForecasting.UI.ModelEditing
 {
     /// <summary>
     /// Окно редактирования модели товарооборота
     /// </summary>
-    public partial class ModelEditingWindow : MetroWindow
+    public sealed partial class ModelEditingWindow : MetroWindow, IView
     {
         /// <summary>
         /// Инициализация окна
         /// </summary>
-        public ModelEditingWindow()
+        /// <param name="viewModel">
+        /// Модель представления редактирования модели планирования товарооборота
+        /// </param>
+        public ModelEditingWindow(ModelEditingViewModel viewModel)
         {
-            InitializeComponent();
-        }
+            Requires.NotNull(viewModel, nameof(viewModel));
 
-        private async void Error(object sender, ValidationErrorEventArgs e)
-        {
-            await this.ShowMessageAsync("Ошибка", e.Error.ErrorContent.ToString());
+            DataContext = viewModel;
+            InitializeComponent();
         }
     }
 }

@@ -5,7 +5,7 @@ namespace RetailPlanningAndForecasting.UI.ModelInitialization
     /// <summary>
     /// Элемент управления редактирования периода планирования товарооборота
     /// </summary>
-    public partial class PlanningPeriodControl : MetroContentControl
+    public sealed partial class PlanningPeriodControl : MetroContentControl
     {
         /// <summary>
         /// Инициализация элемента управления

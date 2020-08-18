@@ -1,5 +1,4 @@
-﻿using System;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using CodeContracts;
 
 namespace RetailPlanningAndForecasting.DomainModel
@@ -8,8 +7,7 @@ namespace RetailPlanningAndForecasting.DomainModel
     /// Статистика по группе отделений торговой сети за год
     /// Группу образуют отделения с одинаковым регионом размещения, направлением и меткой
     /// </summary>
-    [Serializable]
-    public class DepartmentsGroup : BindableBase
+    public sealed class DepartmentsGroup : BindableBase
     {
         /// <summary>
         /// Количество отделений
@@ -51,7 +49,7 @@ namespace RetailPlanningAndForecasting.DomainModel
             {
                 Requires.True(value == null || value >= 0, "Количество супермаркетов не может быть отрицательным");
 
-                base.SetProperty(ref _departmentsCount, value);
+                SetProperty(ref _departmentsCount, value);
             }
         }
 
@@ -63,9 +61,9 @@ namespace RetailPlanningAndForecasting.DomainModel
             get => _plannedTurnover;
             internal set
             {
-                Requires.True(value == null || value >= 0, "Прогнозируемый товарооборот не может быть отрицательным");
+                Requires.True(value == null || value >= 0, "Планируемый товарооборот не может быть отрицательным");
 
-                base.SetProperty(ref _plannedTurnover, value);
+                SetProperty(ref _plannedTurnover, value);
             }
         }
 
@@ -83,12 +81,15 @@ namespace RetailPlanningAndForecasting.DomainModel
             Requires.NotNull(label, nameof(label));
             Requires.InRange(year > 0, nameof(year));
 
-            this.Region = region;
-            this.DepartmentsDirection = direction;
-            this.DepartmentsLabel = label;
-            this.Year = year;
+            Region = region;
+            DepartmentsDirection = direction;
+            DepartmentsLabel = label;
+            Year = year;
         }
 
+        /// <summary>
+        /// Конструктор для десереализации объекта
+        /// </summary>
         private DepartmentsGroup()
         {
 

@@ -4,17 +4,17 @@ using Prism.Commands;
 using CodeContracts;
 using RetailPlanningAndForecasting.Services;
 using RetailPlanningAndForecasting.DomainModel;
+using RetailPlanningAndForecasting.Presentation.Common;
 
 namespace RetailPlanningAndForecasting.Presentation
 {
     /// <summary>
-    /// Модель представления редактирования списка регионов размещения
-    /// отделений торговой сети
+    /// Модель представления редактирования списка регионов размещения отделений торговой сети
     /// </summary>
-    public class RegionsViewModel : ViewModelBase
+    public sealed class RegionsViewModel : ViewModelBase
     {
         /// <summary>
-        /// Репозиторий регионов
+        /// Репозиторий регионов размещения
         /// </summary>
         private readonly IRepository<Region> _repository;
 
@@ -46,12 +46,12 @@ namespace RetailPlanningAndForecasting.Presentation
             get => _regionName;
             set
             {
-                base.ClearErrors(nameof(RegionName));
-                base.SetProperty(ref _regionName, value);
+                ClearErrors(nameof(RegionName));
+                SetProperty(ref _regionName, value);
                 if (string.IsNullOrWhiteSpace(value))
-                    base.AddError(nameof(RegionName), "Название региона не может быть пустым");
+                    AddError(nameof(RegionName), "Название региона не может быть пустым");
                 else if (Regions.Any(region => region.Name == value))
-                    base.AddError(nameof(RegionName), "Указанный регион уже присутствует в списке");
+                    AddError(nameof(RegionName), "Указанный регион уже присутствует в списке");
                 AddRegionCommand.RaiseCanExecuteChanged();
             }
         }
@@ -59,15 +59,15 @@ namespace RetailPlanningAndForecasting.Presentation
         /// <summary>
         /// Создание экземпляра класса
         /// </summary>
-        /// <param name="repositoryCreator">Создатель репозиториев</param>
-        public RegionsViewModel(IRepositoryCreator repositoryCreator)
+        /// <param name="repository">Репозиторий регионов размещения отделений торговой сети</param>
+        public RegionsViewModel(IRepository<Region> repository)
         {
-            Requires.NotNull(repositoryCreator, nameof(repositoryCreator));
+            Requires.NotNull(repository, nameof(repository));
 
-            _repository = repositoryCreator.Create<Region>();
+            _repository = repository;
 
-            Regions = new ObservableCollection<Region>(_repository.Get());
-            AddRegionCommand = new DelegateCommand(AddRegion, () => !base.HasErrors && RegionName != null);
+            Regions = new ObservableCollection<Region>(repository.Get());
+            AddRegionCommand = new DelegateCommand(AddRegion, () => !HasErrors && RegionName != null);
             RemoveRegionCommand = new DelegateCommand<Region>(RemoveRegion);
         }
 
@@ -79,7 +79,7 @@ namespace RetailPlanningAndForecasting.Presentation
             var newRegion = new Region(_regionName);
             _repository.Add(new[] { newRegion });
             Regions.Add(newRegion);
-            base.SetProperty(ref _regionName, null, nameof(RegionName));
+            SetProperty(ref _regionName, null, nameof(RegionName));
             AddRegionCommand.RaiseCanExecuteChanged();
         }
 

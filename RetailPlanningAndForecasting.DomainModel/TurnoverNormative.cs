@@ -1,14 +1,12 @@
-﻿using System;
+﻿using Prism.Mvvm;
 using CodeContracts;
-using Prism.Mvvm;
 
 namespace RetailPlanningAndForecasting.DomainModel
 {
     /// <summary>
     /// Нормативный товарооборот
     /// </summary>
-    [Serializable]
-    public class TurnoverNormative : BindableBase
+    public sealed class TurnoverNormative : BindableBase
     {
         /// <summary>
         /// Значение нормативного товарооборота
@@ -40,7 +38,7 @@ namespace RetailPlanningAndForecasting.DomainModel
             {
                 Requires.True(value == null || value >= 0, "Нормативный товарооборот не может быть отрицательным");
 
-                base.SetProperty(ref _normativeTurnover, value);
+                SetProperty(ref _normativeTurnover, value);
             }
         }
 
@@ -56,11 +54,14 @@ namespace RetailPlanningAndForecasting.DomainModel
             Requires.NotNull(direction, nameof(direction));
             Requires.NotNull(label, nameof(label));
 
-            this.Region = region;
-            this.DepartmentsDirection = direction;
-            this.DepartmentsLabel = label;
+            Region = region;
+            DepartmentsDirection = direction;
+            DepartmentsLabel = label;
         }
 
+        /// <summary>
+        /// Конструктор для десереализации объекта
+        /// </summary>
         private TurnoverNormative()
         {
 

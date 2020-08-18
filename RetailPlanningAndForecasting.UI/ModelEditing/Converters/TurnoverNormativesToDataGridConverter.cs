@@ -11,7 +11,7 @@ namespace RetailPlanningAndForecasting.UI.ModelEditing.Converters
     /// <summary>
     /// Конвертер списка нормативов товарооборота в элемент управления DataGrid
     /// </summary>
-    public class TurnoverNormativesToDataGridConverter : IValueConverter
+    public sealed class TurnoverNormativesToDataGridConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

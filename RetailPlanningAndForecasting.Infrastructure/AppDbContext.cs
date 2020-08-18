@@ -6,7 +6,7 @@ namespace RetailPlanningAndForecasting.Infrastructure
     /// <summary>
     /// Контекст базы данных приложения
     /// </summary>
-    public class AppDbContext : DbContext
+    public sealed class AppDbContext : DbContext
     {
         /// <summary>
         /// Регионы размещения отделений торговой сети

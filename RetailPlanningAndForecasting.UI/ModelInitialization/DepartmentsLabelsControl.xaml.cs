@@ -5,7 +5,7 @@ namespace RetailPlanningAndForecasting.UI.ModelInitialization
     /// <summary>
     /// Элемент управления редактирования списка меток отделений торговой сети
     /// </summary>
-    public partial class DepartmentsLabelsControl : MetroContentControl
+    public sealed partial class DepartmentsLabelsControl : MetroContentControl
     {
         /// <summary>
         /// Инициализация элемента управления

@@ -3,16 +3,17 @@ using Prism.Commands;
 using CodeContracts;
 using RetailPlanningAndForecasting.Services;
 using RetailPlanningAndForecasting.DomainModel;
+using RetailPlanningAndForecasting.Presentation.Common;
 
 namespace RetailPlanningAndForecasting.Presentation
 {
     /// <summary>
     /// Модель представления редактирования периода планирования товарооборота
     /// </summary>
-    public class PlanningPeriodViewModel : ViewModelBase
+    public sealed class PlanningPeriodViewModel : ViewModelBase
     {
         /// <summary>
-        /// Создатель репозиториев
+        /// Репозиторий периода планирования
         /// </summary>
         private readonly IRepository<PlanningPeriod> _repository;
 
@@ -39,12 +40,12 @@ namespace RetailPlanningAndForecasting.Presentation
             get => _startYear;
             set
             {
-                base.ClearErrors(nameof(StartYear));
-                base.SetProperty(ref _startYear, value);
+                ClearErrors(nameof(StartYear));
+                SetProperty(ref _startYear, value);
                 if (value <= 0)
-                    base.AddError(nameof(StartYear), "Год начала периода должен быть положительным числом");
+                    AddError(nameof(StartYear), "Год начала периода должен быть положительным числом");
                 else if (value > _endYear)
-                    base.AddError(nameof(StartYear), "Год начала периода не может быть больше года его конца");
+                    AddError(nameof(StartYear), "Год начала периода не может быть больше года его конца");
             }
         }
 
@@ -56,12 +57,12 @@ namespace RetailPlanningAndForecasting.Presentation
             get => _endYear;
             set
             {
-                base.ClearErrors(nameof(EndYear));
-                base.SetProperty(ref _endYear, value);
+                ClearErrors(nameof(EndYear));
+                SetProperty(ref _endYear, value);
                 if (value <= 0)
-                    base.AddError(nameof(EndYear), "Год конца периода должет быть положительным числом");
+                    AddError(nameof(EndYear), "Год конца периода должет быть положительным числом");
                 else if (value < _startYear)
-                    base.AddError(nameof(EndYear), "Год конца периода не может быть меньше года его начала");
+                    AddError(nameof(EndYear), "Год конца периода не может быть меньше года его начала");
                 SavePeriodCommand.RaiseCanExecuteChanged();
             }
         }
@@ -69,17 +70,17 @@ namespace RetailPlanningAndForecasting.Presentation
         /// <summary>
         /// Создание экземпляра класса
         /// </summary>
-        /// <param name="repositoryCreator">Создатель репозиториев</param>
-        public PlanningPeriodViewModel(IRepositoryCreator repositoryCreator)
+        /// <param name="repository">Репозиторий периода планирования товарооборота</param>
+        public PlanningPeriodViewModel(IRepository<PlanningPeriod> repository)
         {
-            Requires.NotNull(repositoryCreator, nameof(repositoryCreator));
+            Requires.NotNull(repository, nameof(repository));
 
-            _repository = repositoryCreator.Create<PlanningPeriod>();
+            _repository = repository;
 
-            var period = _repository.Get().First();
+            var period = repository.Get().First();
             _startYear = period.StartYear;
             _endYear = period.EndYear;
-            SavePeriodCommand = new DelegateCommand(SavePeriod, () => !base.HasErrors);
+            SavePeriodCommand = new DelegateCommand(SavePeriod, () => !HasErrors);
         }
 
         /// <summary>

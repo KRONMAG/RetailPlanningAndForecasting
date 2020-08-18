@@ -11,7 +11,7 @@ namespace RetailPlanningAndForecasting.UI.ModelEditing.Converters
     /// <summary>
     /// Конвертер списка LikeForLike-коэффициентов в элемент управления DataGrid
     /// </summary>
-    public class LikeForLikesToDataGridConverter : IValueConverter
+    public sealed class LikeForLikesToDataGridConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

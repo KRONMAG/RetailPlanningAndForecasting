@@ -11,7 +11,7 @@ namespace RetailPlanningAndForecasting.UI.ModelEditing.Converters
     /// <summary>
     /// Конвертер списка групп отделений в элемент управления DataGrid
     /// </summary>
-    public class DepartmentsGroupsToDataGridConverter : IMultiValueConverter
+    public sealed class DepartmentsGroupsToDataGridConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

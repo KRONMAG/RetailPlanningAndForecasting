@@ -6,5 +6,5 @@
     <mahapps:MetroContentControl.Resources>
         <converters:LikeForLikesToDataGridConverter x:Key="LikeForLikesToDataGridConverter"/>
     </mahapps:MetroContentControl.Resources>
-    <GroupBox Header="LFL-коэффициенты" Content="{Binding ., Converter={StaticResource LikeForLikesToDataGridConverter}}"/>
+    <GroupBox Header="LFL-коэффициенты" Content="{Binding LikeForLikes, Converter={StaticResource LikeForLikesToDataGridConverter}}"/>
 </mahapps:MetroContentControl>

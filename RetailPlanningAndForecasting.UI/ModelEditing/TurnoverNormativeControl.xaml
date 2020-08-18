@@ -4,7 +4,7 @@
      xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
      xmlns:converters="clr-namespace:RetailPlanningAndForecasting.UI.ModelEditing.Converters">
     <mahapps:MetroContentControl.Resources>
-        <CollectionViewSource x:Key="TurnoverNormatives" Source="{Binding .}">
+        <CollectionViewSource x:Key="TurnoverNormatives" Source="{Binding TurnoverNormatives}">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Region.Name"/>
             </CollectionViewSource.GroupDescriptions>

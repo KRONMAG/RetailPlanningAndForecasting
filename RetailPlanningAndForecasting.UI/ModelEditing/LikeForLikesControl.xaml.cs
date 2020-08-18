@@ -5,7 +5,7 @@ namespace RetailPlanningAndForecasting.UI.ModelEditing
     /// <summary>
     /// Элемент управления редактирования LikeForLike-коэффициентов
     /// </summary>
-    public partial class LikeForLikesControl : MetroContentControl
+    public sealed partial class LikeForLikesControl : MetroContentControl
     {
         /// <summary>
         /// Инициализация элемента управления
