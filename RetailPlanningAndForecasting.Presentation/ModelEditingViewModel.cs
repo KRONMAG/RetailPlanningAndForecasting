@@ -89,7 +89,6 @@ namespace RetailPlanningAndForecasting.Presentation
         /// </summary>
         private void SaveModel()
         {
-            ClearErrors(null);
             try
             {
                 if (_dialogService.SaveFileDialog(out string path))

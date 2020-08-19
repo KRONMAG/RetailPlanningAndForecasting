@@ -8,6 +8,7 @@
                                                TargetNullValue=0,
                                                ValidatesOnExceptions=True,
                                                UpdateSourceTrigger=PropertyChanged}"
+                               Minimum="0"
                                Interval="0.01"/>
     </GroupBox>
 </mahapps:MetroContentControl>

@@ -25,6 +25,7 @@ namespace RetailPlanningAndForecasting.UI.ModelEditing.DataGridHelpers
                         TargetNullValue=0,
                         ValidatesOnExceptions=True,
                         UpdateSourceTrigger=PropertyChanged}}""
+                        Minimum=""0""
                         HideUpDownButtons=""True""
                         IsReadOnly=""{isReadOnly}""/>
                 </DataTemplate>"
